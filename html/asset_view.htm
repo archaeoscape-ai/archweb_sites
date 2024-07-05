@@ -1,0 +1,65 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>RCRC/GAP Databases</title>
+<link rel="stylesheet" href="styles/backend_style.css" type="text/css" />
+<link rel="icon" 
+      type="image/ico" 
+      href="clipboard.ico">
+</head>
+<body>
+<h2>RCRC/GAP Databases | View Asset #[foreach myassets getasset][asset_id]</h2>
+<p><a href="./.">Home</a> | <a href="asset_add.php">Add a New Asset</a> | <a href="asset_edit.php?asset_id=[asset_id]">Edit This Asset</a></p>
+<table>
+  <tr>
+		<td>Label (Exterior)</td>
+		<td>[asset_label]</td>
+	</tr>
+  <tr>
+		<td>Label (Interior Tag)</td>
+		<td>[asset_tag]</td>
+	</tr>
+  <tr>
+		<td>Year</td>
+		<td>[asset_year]</td>
+	</tr>
+  <tr>
+		<td>Notes / Description</td>
+		<td>[asset_notes]</td>
+	</tr>    
+  <tr>
+		<td>Samples Removed for Export/Lab/Analytical Work?</td>
+		<td>[if:asset_sampled:1]Yes[else]No[end-if]</td>
+	</tr>     
+  <tr>
+		<td>Information on Samples Removed for Export/Lab/Analytical Work</td>
+		<td>[asset_sampled_notes]</td>
+	</tr>   
+  <tr>
+		<td>Packaging</td>
+		<td>[packaging_name]</td>
+	</tr>
+  <tr>
+		<td>Material</td>
+		<td>[materialtype_name]</td>
+	</tr>
+  <tr>
+		<td>Ceramic Type</td>
+		<td>[ceramictype_name]</td>
+	</tr>
+  <tr>
+		<td>Container ID</td>
+		<td>[asset_container_id] | <a href="container_view.php?container_id=[asset_container_id]">See What Other Assets are in the Same Container</a></td>
+	</tr> 
+</table>
+
+<br />
+[if:asset_photo_name]<h3>Photo of Content Item</h3><a href="phpthumb/phpThumb.php?src=../myassets/[asset_id]" target="_blank"><image src="phpthumb/phpThumb.php?src=../myassets/[asset_id]&w=400"></a>[end-if]
+
+[if:container_photo_name]<h3>Photo of Container</h3><a href="phpthumb/phpThumb.php?src=../mycontainers/[container_id]" target="_blank"><image src="phpthumb/phpThumb.php?src=../mycontainers/[container_id]&w=400"></a>[end-if]
+
+[end-foreach]
+</body>
+
+</html>

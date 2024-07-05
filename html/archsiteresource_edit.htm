@@ -1,0 +1,82 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles/sidebarstyle.css" type="text/css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+    <script src="scripts/angkorfunctions.js"></script>
+
+    <script>
+      $(document).ready(function(){
+	       $("tr:odd").addClass("odd");
+      });
+    </script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+</head>
+
+<body>
+
+<form action="archsiteresource_edit.php" method="post" id="editform" enctype="multipart/form-data">
+
+[update myarchsiteresources addresource]
+
+[errors]
+[dump-vars]
+<h1>Update  Metadata for Resource at [select myarchsites getarchsite]Site [archsite_id] ([archsite_name_en][end-select])</h1>
+<br/><br/>
+<img class="resourcethumb" src="phpthumb/phpThumb.php?src=../myarchsiteresources/[archsiteresource_id]&w=365"/>
+
+<table>
+  <tr>
+    <td class="label">Linked Site ID</td>
+    <td class="attribute">[textbox:archsiteresource_archsite_id:archsite_id: class="disabled" readonly]</td>
+  </tr>
+  <tr>
+    <td class="label">Caption</td>
+    <td class="attribute">[textarea:archsiteresource_caption:Caption]</td>
+  </tr>
+  <tr>
+    <td class="label">Type of Resource</td>
+    <td class="attribute">[dropdown required:archsiteresource_type:Type:select archsiteresource_type_id,archsiteresource_type_name from archsiteresource_types ORDER BY archsiteresource_type_name:class="required"]</td>
+  </tr>  
+  <tr>
+    <td class="label">Author</td>
+    <td class="attribute">[dropdown required:archsiteresource_author:Author:select individual_id,individual_name from individuals ORDER BY individual_name:class="required"]</td>
+  </tr>
+  <tr>
+    <td class="label">Date & Time</td>
+    <td class="attribute">[textbox:archsiteresource_date:Date and Time]</td>
+  </tr>   
+  <td class="label">Project Ownership</td>
+    <td class="attribute">[dropdown required:archsiteresource_ownership:Ownership:select project_id,project_name from projects ORDER BY project_name:class="required"]</td>
+  </tr>  
+  <tr>
+    <td class="label">Added By</td>
+    <td class="attribute">[dropdown required:archsiteresource_added_by:Added By:select individual_id,individual_name from individuals ORDER BY individual_name:class="required"]</td>
+  </tr>
+  <tr>
+    <td class="label">Notes</td>
+    <td class="attribute">[textarea:archsiteresource_notes:Notes]</td>
+  </tr>
+  <tr>
+    <td class="label">Sort Order</td>
+    <td class="attribute">[textbox:archsiteresource_sortorder:Sort Order]</td>
+  </tr>    
+  <tr>
+	<td class="label">Resource File</td>
+		<td class="label">[file :  upload_file  : File : class="file" id="file"]</td>
+	</tr>               
+</table>
+
+<input type="Submit" value="Submit" class="button"><input type="button" value="Cancel" class="button" id="cancelbutton" onclick="javascript:history.back()">
+
+[end-update]
+</form>
+
+<div id="upbutton"><a href="javascript:void(0)"  title="Return to Top"  onclick="javascript:scrollup();"><img src="images/up.png"/></a></div>
+
+
+</body>
+
+</html>

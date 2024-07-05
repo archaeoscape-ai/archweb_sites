@@ -1,0 +1,27 @@
+<html>
+<body>
+
+
+
+<table>
+<form id="linkageform" action="archsiteresource_contentadd.php" method="post" enctype="multipart/form-data">
+[insert myarchsiteresources_lnk_artefacttypes addlinkage]
+[dump-vars]
+  <tr>
+		<td>The Resource</td>
+		<td>[textbox:archsiteresources_lnk_artefacttypes_archsiteresource_id:Resource:id="theresource"]</td>
+	</tr>
+  <tr>
+		<td>The Thing In It</td>
+		<td>[textbox:archsiteresources_lnk_artefacttypes_artefacttype_id:Artefact:id="thething"]</td>
+	</tr>
+</table>
+<input type="submit" value="Submit" class="button">
+
+[end-insert]
+</form>
+
+
+
+</body>
+</html>

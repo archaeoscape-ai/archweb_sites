@@ -1,0 +1,56 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>RCRC/GAP Databases</title>
+<link rel="stylesheet" href="styles/backend_style.css" type="text/css" />
+<link rel="icon" 
+      type="image/ico" 
+      href="clipboard.ico">
+</head>
+<body>
+<h2>RCRC/GAP Databases | View Worksite Resource #[select myworksiteresources getresource][worksiteresource_id]</h2>
+
+
+
+
+
+<a href="../databases/myworksiteresources/[worksiteresource_worksite_id]/[worksiteresource_file_name]" target="_blank"><image src="phpthumb/phpThumb.php?src=../myworksiteresources/[worksiteresource_worksite_id]/[worksiteresource_file_name]&w=400&f=png"></a>
+
+<table>
+  <tr>
+    <td class="label">Resource [literal][[end-literal]<a href="worksiteresource_edit.php?worksiteresource_id=[worksiteresource_id]">Edit</a>[literal]][end-literal]</td>
+    <td class="attribute">[worksiteresource_id]</td>  
+  </tr>
+   <tr>
+    <td class="label">Resource Type</td>
+    <td class="attribute">[worksiteresource_type_name]</td>  
+  </tr>
+  <tr>
+    <td class="label">Field Season</td>
+    <td class="attribute">[fieldseason_name]</td>  
+  </tr>
+  <tr>
+    <td class="label">Trench #</td>
+    <td class="attribute">[trench_name]</td>  
+  </tr>
+  <tr>
+    <td class="label">Context</td>
+    <td class="attribute">[worksiteresource_context]</td>  
+  </tr>
+  <tr>
+  <td class="label">Caption</td>
+  <td class="attribute">[worksiteresource_caption]</td>
+  [not-found]&nbsp;[end-not-found]
+    </td> 
+  </tr>  
+</table>
+
+<hr class="photodivider">
+
+
+[end-select]
+
+</body>
+
+</html>

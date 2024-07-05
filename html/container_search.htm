@@ -1,0 +1,142 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>RCRC/GAP Databases</title>
+<link rel="stylesheet" href="styles/backend_style.css" type="text/css" />
+<link rel="stylesheet" href="styles/bluetheme.css" type="text/css"/>
+<link rel="icon" 
+      type="image/ico" 
+      href="clipboard.ico">
+
+</head>
+<body>
+
+<h2>RCRC/GAP Databases | Search for Containers</h2>
+<p><a href="./.">Home</a> | <a href="container_add.php">Add a New Container</a> | <a href="worksites.php">Manage Work Site List</a> | <a href="container_byphoto.php">Browse Containers by Photo</a> | <a href="asset_search.php" target="_blank">Go to Assets</a></p>
+
+
+<!-- Search form -->
+<form action="container_search.php">
+[search mycontainers mainsearch]
+<table>
+  <tr>
+		<td>Container ID</td>
+		<td>[textbox:container_id:containerid]</td>
+	</tr>
+  <tr>
+		<td>Label (Main/Front)</td>
+		<td>[textbox:container_label_front:mainlabel]</td>
+	</tr>
+  <tr>
+		<td>Label (Text/Lid)</td>
+		<td>[textbox:container_label_lid:toplabel]</td>
+	</tr>
+	<tr>
+		<td>Container Type</td>
+		<td>[dropdown :container_containertype:containertype:select containertype_id,containertype_name from containertypes ORDER BY containertype_name]</td>
+	</tr>
+  <tr>
+		<td>Size</td>
+		<td>[dropdown :container_size:size:select size_id,size_name from sizes ORDER BY size_name]</td>
+	</tr>
+  <tr>
+		<td>Contents</td>
+		<td>[dropdown :container_contenttype:size:select contenttype_id,contenttype_name from contenttypes ORDER BY contenttype_name]</td>
+	</tr>
+  <tr>
+		<td>Location</td>
+		<td>[dropdown :container_location:location:select location_id,location_name from locations ORDER BY location_name]</td>
+	</tr>
+  <tr>
+		<td>Work Site</td>
+		<td>[dropdown :container_worksite:worksite:select worksite_id,worksite_name from worksites ORDER BY worksite_name]</td>
+	</tr>
+  <tr>
+		<td>Project</td>
+		<td>[dropdown :container_project:project:select project_id,project_name from projects ORDER BY project_name]</td>
+	</tr>  
+  <tr>
+		<td>Notes / Description</td>
+		<td>[textbox:container_description:description]</td>
+	</tr>  
+  <tr>
+		<td>Deaccsessioned?</td>
+		<td>[checkbox:container_deaccessioned:deaccessioned:]</td>
+	</tr>   
+  <tr>
+		<td>Deaccession Information</td>
+		<td>[textbox:container_deaccession_notes:deaccessioninfo]</td>
+	</tr>      
+	<tr>
+		<td></td>
+		<td><input type="submit" value="Search" class="button"><input type="button" value="Reset"  onClick="self.location.href='container_search.php'" class="button"></td>
+	</tr>
+</table>
+</form>
+<!-- End Search form -->
+
+[if-eq:mainsearch-searched:"1"]
+
+
+  [if:result-count]
+   <h3>There are [result-count] matching records. Showing results [result-first] to [result-last].</h3>
+   [else]<h3>No records match those criteria</h3>
+  [end-if]
+
+  [if:prev-url]<a class="searchnav" href="[prev-url]">&laquo; Previous Page</a>[end-if]
+  [if:next-url][if:prev-url]  |  [end-if]<a class="searchnav" href="[next-url]">Next Page &raquo;</a>[end-if]
+
+
+<table id="myTable" class="tablesorter">
+ <thead>
+  <tr class="title">
+    <th>ID #&nbsp;&nbsp;&nbsp;</th>
+    <th>Label (Main/Front)</th>
+    <th>Label (Lid/Top)</th>
+    <th>Container Type</th>
+    <th>Size</th>
+    <th>Contents</th>
+    <th>Location</th>
+    <th>Work Site</th>
+    <th>Project</th>
+    <th>Description</th>
+    <th>Deaccessioned?</th>
+    <th>Photo</th>    
+  </tr>
+ </thead>
+ <tbody> 
+[foreach mycontainers getcontainer: 1 order by container_id asc]
+  <tr>
+    <td><a class="recordtitle" href="container_view.php?container_id=[container_id]">[container_id]<br><br><img src="images/link.png"/></a></td>
+    <td><div>[container_label_front]</div></td>
+    <td><div>[container_label_lid]</div></td>
+    <td>[containertype_name]</td>
+    <td>[size_name]</td>
+    <td>[contenttype_name]</td>
+    <td>[location_name]</td>
+    <td>[worksite_name]</td>
+    <td>[project_name]</td>
+    <td><div>[container_description]</div></td>
+    <td>[if:container_deaccessioned:1]Already[else]Not Yet[end-if]</td>
+    <td>[if:container_photo_name]<a href="phpthumb/phpThumb.php?src=../mycontainers/[container_id]" target="_blank"><image src="phpthumb/phpThumb.php?src=../mycontainers/[container_id]&w=100"></a>[else]Photo Missing[end-if]</td>
+</td>
+  </tr>
+[end-foreach]
+  </tbody>
+</table>
+
+  [if:result-count]
+   <h3>There are [result-count] matching records. Showing results [result-first] to [result-last].</h3>
+   [else]<h3>No records match those criteria</h3>
+  [end-if]
+
+  [if:prev-url]<a class="searchnav" href="[prev-url]">&laquo; Previous Page</a>[end-if]
+  [if:next-url][if:prev-url]  |  [end-if]<a class="searchnav" href="[next-url]">Next Page &raquo;</a>[end-if]
+  <br><br>
+
+[end-if-eq]
+  
+[end-search]
+</body>
+</html>

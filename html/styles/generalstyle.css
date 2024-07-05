@@ -1,0 +1,497 @@
+/* CSS for the Angkor Sunset Site*/
+
+/* ------------------------------*/
+
+
+
+/* Body Level */
+
+html, body {
+  background-image:url('../images/background.jpg');
+  background-size: cover;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  background-color:#333333;
+  text-decoration:none;
+  font-family:Verdana, Arial, sans-serif;
+  font-size:12px;
+  height:100%;
+  margin:0px;
+  padding:0px;
+  
+}
+
+/* Text and Image Styles etc*/
+
+a {
+  text-decoration:none;
+}
+
+a:link {color:#f78c00;}      /* unvisited link */
+a:visited {color:#f78c00;}  /* visited link */
+a:hover {color:grey;}  /* mouse over link */
+
+h2 {
+  font-family:Verdana, Arial, sans-serif;
+  font-size:14px;
+  padding-left:10px;
+}
+
+
+img {
+  border-style: none; 
+}
+
+hr {
+  color: #dedede;
+  background-color: #dedede;
+  height: 1px;
+  border: none;
+  padding: 0px;
+  margin:0px;
+}
+
+
+
+/*  Divs and their Contents*/
+
+
+div {
+  margin:0px;
+  padding:0px;
+}
+
+div#header {
+  background-image:url('../images/background_darknoise.gif');
+  background-color:black;  
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:100000;
+  width:100%;
+  height:40px;
+}
+
+div#header_contents {
+  background-image:url('../images/sunset_header.png');
+  background-repeat:no-repeat; 
+  width:862px;
+  height:40px;
+  position:relative;
+  margin:0 auto;
+
+}
+
+div#header_rightside {
+ float: right; 
+ height:40px;
+}
+
+
+div#header_functions {
+  height: 40px;
+  float:left;
+  width: 240px;
+}
+
+
+img#loadingbar {
+  margin-top:13px;
+  float:left;
+}
+
+a#infobutton {
+display:block;
+float: right;
+margin-top:5px;
+margin-right: 8px;
+display:none;
+
+}
+
+div#socialmedia {
+  float: right;
+  padding-top: 5px;
+  width: 166px;
+}
+
+
+div#container {
+  background-image:url('../images/op20.png');
+  margin:0 auto;
+  margin-top:40px;
+  width:862px;
+  position:relative;
+  overflow: auto
+}
+
+div#dash {
+  float: left;
+  width: 300px;
+  margin-top:14px;
+  margin-left:14px;
+}
+
+div#search { 
+  background-color:white; 
+  opacity:0.95;
+  filter:alpha(opacity=95); /* For IE8 and earlier */
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  overflow:auto;
+  padding-bottom:14px;
+}
+
+div#searchformcontainer { 
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top 0px;
+}
+
+div#searchformcontainer p { 
+  font-size: 14px;
+  margin-bottom: none;
+  padding-bottom: none;
+}
+
+div#searchformcontainer input { 
+  font-size: 14px;
+  padding: 3px;
+  height: 18px;
+  width: 268px;
+  border: 1px solid #bfbfbf;
+  margin-top: 10px;
+  padding-left:6px;
+}
+
+div#searchformcontainer select { 
+  font-size: 14px;
+  width:100%;
+  padding: 3px;
+  margin-top:10px;
+  margin-bottom: 6px;
+  border: 1px solid #bfbfbf;
+}
+
+div#searchformcontainer select option { 
+  padding-top: 3px;
+}
+
+div#searchformcontainer a {
+  display:block;
+  float: left;
+  width:30px;
+  height:30px;
+  margin-top: 18px;
+  margin-right: 14px;
+}
+
+div#searchformcontainer a#check_security {
+  background-image:url('../images/icon_security_gray75.png');
+}
+
+div#searchformcontainer a#check_disability {
+  background-image:url('../images/icon_disability_gray75.png');
+}
+
+div#searchformcontainer a#check_toilet {
+  background-image:url('../images/icon_toilet_gray75.png');
+}
+
+div#searchformcontainer a#check_security:hover {
+  background-image:url('../images/icon_security_gray60.png');
+}
+
+div#searchformcontainer a#check_disability:hover {
+  background-image:url('../images/icon_disability_gray60.png');
+}
+
+div#searchformcontainer a#check_toilet:hover {
+  background-image:url('../images/icon_toilet_gray60.png');
+}
+
+div#searchformcontainer button {
+
+  padding-top: 16px;
+  margin-top: 16px;
+  float: right;
+  
+  
+  /* #fce2c1 very light orange */
+  
+  /* #ffc477 light-mid light orange */
+  /* #eeb44f light-mid light orange-grey */
+  
+  /* #fb9e25 mid-dark orange-grey */
+  /* #fb9e25 mid-dark orange - #FF6A00*/
+
+	-moz-box-shadow:inset 0px 1px 0px 0px #fce2c1;      
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffc477), color-stop(1, #FF6A00) );
+	background:-moz-linear-gradient( center top, #ffc477 5%, #FF6A00 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc477', endColorstr='#FF6A00');
+	background-color:#ffc477;
+	border:1px solid #eeb44f;
+	display:inline-block;
+	color: white;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #cc9f52;
+}  
+  
+div#searchformcontainer button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #FF6A00), color-stop(1, #ffc477) );
+	background:-moz-linear-gradient( center top, #FF6A00 5%, #ffc477 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff9100', endColorstr='#ffc477');
+	background-color:#FF6A00;
+  cursor: hand; 
+  cursor: pointer;
+}
+
+div#searchformcontainer button:active {
+	position:relative;
+	top:1px;
+}
+
+
+
+div#map {
+  background-color:white; 
+  opacity:0.95;
+  filter:alpha(opacity=95); /* For IE8 and earlier */
+  height:300px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  margin-top:14px;
+  margin-bottom:14px;
+  padding:14px;
+}
+
+div#map h2 {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+div#map_canvas {
+  height:100%;
+  width:100%;
+}
+
+div#conservation {
+  background-color:white; 
+  opacity:0.95;
+  filter:alpha(opacity=95); /* For IE8 and earlier */
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  margin-bottom:14px;
+  padding-top: 1px;
+  padding-bottom:14px; 
+}
+
+div#conservation h2 {
+  padding-left:14px;
+}
+
+div#conservation p {
+  padding-left: 14px;
+  padding-right: 14px;
+  line-height: 24px;
+}
+
+ 
+div#credits {
+  background-color:white; 
+  opacity:0.95;
+  height: 105px;
+  filter:alpha(opacity=95); /* For IE8 and earlier */
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  margin-bottom:14px;
+  overflow:hidden;
+}
+
+#creditstext {
+  margin:0px;
+  padding:0px;
+  font-size:9px;
+  color: grey;
+  text-align:center;
+}
+
+#creditstext a:link, #creditstext a:visited {
+  color: grey;
+}
+
+
+
+div#welcome {
+  background-color:white; 
+  opacity:0.95;
+  filter:alpha(opacity=95); /* For IE8 and earlier */
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  margin-top:14px;
+  padding-top: 1px;
+  padding-bottom:14px; 
+  width: 520px;
+  margin-right:14px;
+  float:right;
+  display:none;
+}
+
+div#welcome h2 {
+  padding-left:14px;
+  display:block;
+  width: 70%;
+}
+
+img#infoicon {
+  display:block;
+  float: left;
+  padding-right:10px;
+  padding-top:6px;
+  padding-left: 10px;
+  padding-bottom: 0px;
+  margin-bottom:0px;
+}
+
+a#close_infowindow {
+  display: block;
+  float:right;
+  padding-right: 14px;
+  padding-top: 12px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+
+div#welcome p {
+  padding-left: 14px;
+  padding-right: 14px;
+  line-height: 24px;
+}
+
+
+
+div#content {
+  opacity:0.95;
+  filter:alpha(opacity=95); /* For IE8 and earlier */
+  background-color:white; 
+  float: right;
+  width: 520px;
+  margin-top:14px;
+  margin-right:14px;
+  margin-bottom:14px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding-bottom:40px;
+}
+
+span#noresults {
+  display:none;
+}
+
+div#preload { display: none; }
+
+/* Collapsible Divs*/
+
+
+.headerimage {
+    display:block;
+    float:right;
+    margin-right:5px;
+    margin-top:5px;
+}
+
+.headertext {
+    display:block;
+    float:left;
+    margin-top:15px;
+    cursor: hand; 
+    cursor: pointer;
+
+}
+
+
+div.siteimage {
+  margin:0px;
+  padding:0px;
+  height: 70px;
+  float: right;
+}
+
+
+.collapsible {
+    margin: 0px;
+    padding:0px;
+    height:70px;
+    border-top:#f0f0f0 1px solid;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration:none;
+    color: #000;
+    font-size:1em; 
+    border-top: 1px solid #dedede;
+}
+
+
+.collapsible:hover {
+     background:url(../images/headergradient_hover_orange.gif);
+     background-repeat: repeat-x;    /* Tiles horizontally (i.e. along the x-axis) */  
+}
+
+
+.collapse-open {
+       background:url(../images/headergradient.gif);
+       background-repeat: repeat-x;    /* Tiles horizontally (i.e. along the x-axis) */   
+}
+    
+.collapse-open span {
+    display:block;
+    float:left;
+    padding:10px; }
+    
+.collapse-open span {
+    background:url(../images/shut.png) center center no-repeat; 
+    margin-top:14px;  
+    margin-left:10px;
+    cursor: hand; 
+    cursor: pointer;    
+}
+    
+.collapse-close span {
+    display:block;
+    float:left;
+    background:url(../images/open.png) center center no-repeat;
+    padding:10px; 
+    margin-top:14px;    
+    margin-left:10px;
+    cursor: hand; 
+    cursor: pointer;  
+}
+
+
+div.site_container {
+    padding:0;
+    margin:0;
+}
+
+
+div.site_content {
+    margin: 0;
+} 
+ 
+div.site_content p {
+   padding-right: 10px;
+   padding-left: 30px ;
+   text-indent: -20px ;
+}
+
+
+    
+    
+.hidden {
+   display:none;
+}

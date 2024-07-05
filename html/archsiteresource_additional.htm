@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles/sidebarstyle.css" type="text/css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+    <script src="scripts/angkorfunctions.js"></script>
+
+    <script>
+      $(document).ready(function(){
+	       $("tr:odd").addClass("odd");
+      });
+      
+      
+    var selected = [literal][[end-literal][select myarchsiteresources resource][foreach myarchsiteresources_lnk_artefacttypes getartefacttypes][select myartefacttypes getartefacttype]"[artefacttype_id]",[end-select][end-foreach][end-select][literal]][end-literal];
+    
+      
+    </script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+</head>
+
+<body onload="highlightselected()">
+
+[/*select myarchsiteresources resource]
+
+ [dump-vars]
+ 
+  [foreach myarchsiteresources_lnk_artefacttypes getartefacttypes]
+  [not-found]&nbsp;[end-not-found]
+  
+      [select myartefacttypes getartefacttype][artefacttype_id][end-select]
+      [not-found]&nbsp;[end-not-found]
+      
+  [end-foreach]
+
+[end-select*/]
+
+
+[select myarchsiteresources resourceid]
+<h1>Photo Metadata for New Resource at [select myarchsites getarchsite]Site [archsite_id] ([archsite_name_en][end-select])...?</h1>
+<br/><br/>
+<img class="resourcethumb" src="phpthumb/phpThumb.php?src=../myarchsiteresources/[archsiteresource_id]&w=365"/>
+[errors]
+[dump-vars]
+<table>
+  <tr>
+    <td class="label">Caption</td>
+    <td class="attribute">[archsiteresource_caption]</td>
+  </tr>              
+</table>
+<br><br>
+[end-select]
+
+<iframe src="archsiteresource_contentadd.php" id="linkageframe"></iframe> 
+
+
+[select myarchsiteresources resourcemodify]
+  
+      [foreach myartefacttypes getartefacttypes: 1 order by artefacttype_name asc]
+                        [dump-vars]                   
+                        <input type="button" class="typebutton" id="[artefacttype_id]" value="[artefacttype_name]" onclick="linkstuff([archsiteresource_id],[artefacttype_id])">
+            
+      [end-foreach]
+
+
+
+<input type="button" value="Finished" class="button" onclick="javascript:window.location.href='archsite_view.php?archsite_id=[archsiteresource_archsite_id]';">
+
+<input type="button" value="+ Photos" class="button" onclick="javascript:window.location.href='archsiteresource_add.php?addresource_archsiteresource_archsite_id=[archsiteresource_archsite_id]';">
+
+[end-select]
+
+<div id="photoupbutton"><a href="javascript:void(0)"  title="Return to Top"  onclick="javascript:scrollup();"><img src="images/up.png"/></a></div>
+
+
+</body>
+
+</html>

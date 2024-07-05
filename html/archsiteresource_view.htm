@@ -1,0 +1,5 @@
+[select myarchsites getsite]
+[foreach myarchsiteresources getresource: 1 order by archsiteresource_sortorder asc]
+<a href="phpthumb/phpThumb.php?src=../myarchsiteresources/[archsiteresource_id]" class="fancybox" rel="group" id="res[archsiteresource_id]"><!--img class="resourcethumb" src="phpthumb/phpThumb.php?src=../myarchsiteresources/[archsiteresource_id]&w=365"/ --></a>
+[end-foreach]
+[end-select]

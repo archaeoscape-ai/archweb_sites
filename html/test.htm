@@ -1,0 +1,290 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles/sidebarstyle.css" type="text/css" />
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script> 
+    <script src="scripts/angkorfunctions.js"></script>
+
+
+    <link rel="stylesheet" href="scripts/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="scripts/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <script type="text/javascript" src="scripts/jquery.mousewheel-3.0.6.pack.js"></script>
+    <link rel="stylesheet" href="scripts/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="scripts/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+    <script type="text/javascript" src="scripts/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+    <link rel="stylesheet" href="scripts/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+    <script type="text/javascript" src="scripts/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
+
+    <script>
+      $(document).ready(function(){
+	       $("tr:odd").addClass("odd");
+         $(".fancybox").fancybox();
+      });
+    </script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+</head>
+
+<body onunload="parent.cleargeo()">
+
+<form action="test.php" method="post" enctype="multipart/form-data">
+
+[update required myarchsites editsite]
+
+<h1>[archsite_id]: [archsite_name_en]</h1>
+<br/><br/>
+
+[errors]
+[dump-vars]
+
+
+<table>
+  <tr>
+    <td class="label">English Name</td>
+    <td class="attribute">[textbox required:archsite_name_en:Name of the Site in English:class="required"]</td>
+  </tr>
+  <tr>
+    <td class="label">French Name</td>
+    <td class="attribute">[textbox:archsite_name_fr:archsite_name_fr]</td>
+  </tr>
+  <tr>
+    <td class="label">Khmer Name</td>
+    <td class="attribute">[textbox:archsite_name_kh:archsite_name_kh]</td>
+  </tr>  
+  <tr>
+    <td class="label">Alternative Name(s)</td>
+    <td class="attribute">[textbox:archsite_names_alt:archsite_names_alt]</td>
+  </tr>
+  <tr>
+    <td class="label">Alternative Khmer Name(s)</td>
+    <td class="attribute">[textbox:archsite_names_kh_alt:archsite_names_kh_alt]</td>
+  </tr>
+  <tr> 
+    <td class="label">Site Type</td>
+    <td class="attribute">[dropdown required:archsite_archsitetype:Type of Archaeological Site:select archsitetype_id,archsitetype_name from archsitetypes ORDER BY archsitetype_name:class="required"]</td>
+  </tr>
+  
+  <tr> 
+    <td class="label">Description</td>
+    <td class="attribute">[textarea:archsite_description:archsite_description]</td>
+  </tr>
+  <tr>
+    <td class="label" cols>Inventaire Khmere (IK) ID</td>
+    <td class="attribute">[textbox:archsite_IK_id:archsite_IK_id]</td>
+  </tr>
+  <tr>
+    <td class="label" cols>IK ID Starred</td>
+    <td class="attribute">[checkbox:archsite_IK_starred:archsite_IK_starred]</td>
+  </tr>
+  <tr>  
+    <td class="label">Monuments Historiques (MH) ID</td>
+    <td class="attribute">[textbox:archsite_MH_id:archsite_MH_id]</td>
+  </tr>
+  <tr>  
+    <td class="label">Jean Boulbet 1979 (JB) ID</td>
+    <td class="attribute">[textbox:archsite_JB_id:archsite_JB_id]</td>
+  </tr>
+  <tr>    
+    <td class="label">MOCFA/EFEO CISARK (CK) ID</td>
+    <td class="attribute">[textbox:archsite_CK_id:archsite_CK_id]</td>
+  </tr>
+  <tr>          
+    <td class="label">Chistophe Pottier (CP) ID</td>
+    <td class="attribute">[textbox:archsite_CP_id:archsite_CP_id]</td>
+  </tr>
+  <tr>    
+    <td class="label">Elizabeth Moore (EM) ID</td>
+    <td class="attribute">[textbox:archsite_EM_id:archsite_EM_id]</td>
+  </tr>    
+  <tr>    
+    <td class="label">Boulbet/Dagens (BD) ID</td>
+    <td class="attribute">[textbox:archsite_BD_id:archsite_BD_id]</td>
+  </tr>
+  <tr>    
+    <td class="label">George Trouve (GT) ID</td>
+    <td class="attribute">[textbox:archsite_GT_id:archsite_GT_id]</td> 
+  <tr>
+  <tr>    
+    <td class="label">ADF Phnom Kulen (PK) ID</td>
+    <td class="attribute">[textbox:archsite_PK_id:archsite_PK_id]</td> 
+  <tr>
+  <tr>    
+    <td class="label">Sambor Prei Kuk (IS) ID</td>
+    <td class="attribute">[textbox:archsite_IS_id:archsite_IS_id]</td> 
+  <tr> 
+  <tr>
+    <td class="label">Unresolved ID Ambiguity</td>
+    <td class="attribute">[checkbox:archsite_id_ambiguity:archsite_id_ambiguity]</td>
+   </tr>   
+   <tr>
+    <td class="label">Details of ID Ambiguity</td>
+    <td class="attribute">[textarea:archsite_id_ambiguity_detail:archsite_id_ambiguity_detail]</td>
+   </tr>  
+   <tr>
+    <td class="label">Latitude<a href="#coordsection"></a></td>
+    <td class="attribute">[textbox required:archsite_latitude:Latitude of the Site in DD WGS84:class="required" id="latbox"]</td>
+  </tr>
+  <tr>
+    <td class="label">Longitude</td>
+    <td class="attribute">[textbox required:archsite_longitude:Longitude of the Site in DD WGS84:class="required" id="longbox"]</td>
+   </tr>
+  <tr>
+    <td class="label">Alternative Maps</td>
+    <td class="attribute"><a href="http://www.bing.com/maps/default.aspx?cp=[archsite_latitude]~[archsite_longitude]&lvl=18&style=a" target="_blank" >Bing</a></td>
+   </tr>     
+  <tr>
+    <td class="label">Source of Coordinates</td>
+    <td class="attribute"><a href="javascript:void(0)" onclick="parent.getcoords();" title="Use Map" id="getcoordbutton"><img src="images/reticle_sm.png"/></a>[textbox required:archsite_coordinate_source:Source of the Coordinate Information:class="required" id="sourcebox"]</td>
+   </tr>
+  <tr>
+    <td class="label">In GAP Study Area</td>
+    <td class="attribute">[checkbox:archsite_in_gap_studyarea:archsite_in_gap_studyarea]</td>
+   </tr>
+  <tr>
+    <td class="label">Ground Verified</td>
+    <td class="attribute">[checkbox:archsite_ground_verified:archsite_ground_verified]</td>
+   </tr>
+  <tr>
+    <td class="label">Date & Time Verified</td>
+    <td class="attribute">[textbox:archsite_ground_verified_datetime:archsite_ground_verified_datetime]</td>
+  </tr> 
+  <tr>
+  <td class="label">Ground Verified By</td>
+    <td class="attribute">[dropdown:archsite_ground_verified_by:archsite_ground_verified_by:select project_id,project_name from projects ORDER BY project_name]</td>
+  </tr>
+  <td class="label">Initially Located By</td>
+    <td class="attribute">[dropdown required:archsite_initially_located_by:Who Initially Located the Site:select project_id,project_name from projects ORDER BY project_name:class="required"]</td>
+  </tr>
+  <tr>      
+    <td class="label">Surface Ceramics</td>
+    <td class="attribute">[checkbox:archsite_ceramics:archsite_ceramics]</td>
+  </tr> 
+  <tr>      
+    <td class="label">Ceramics Details</td>
+    <td class="attribute">[textarea:archsite_ceramics_comment:archsite_ceramics_comment]</td>
+  </tr>   
+  <tr>      
+    <td class="label">Build Material: Sandstone</td>
+    <td class="attribute">[checkbox:archsite_material_sandstone:archsite_material_sandstone]</td>
+  </tr>
+  <tr>      
+    <td class="label">Build Material: Pink Sandstone</td>
+    <td class="attribute">[checkbox:archsite_material_pink_sandstone:archsite_material_pink_sandstone]</td>
+  </tr>          
+  <tr>      
+    <td class="label">Build Material: Laterite</td>
+    <td class="attribute">[checkbox:archsite_material_laterite:archsite_material_laterite]</td>
+  </tr>
+  <tr>      
+    <td class="label">Build Material: Brick</td>
+    <td class="attribute">[checkbox:archsite_material_brick:archsite_material_brick]</td>
+  </tr>
+  <tr>      
+    <td class="label">Build Material: Thma Phnom</td>
+    <td class="attribute">[checkbox:archsite_material_thmaphnom:archsite_material_thmaphnom]</td>
+  </tr>    
+  <tr>      
+    <td class="label">Build Material: Other</td>
+    <td class="attribute">[checkbox:archsite_material_other:archsite_material_other]</td>
+  </tr>
+  <tr>      
+    <td class="label">Build Material: Comments</td>
+    <td class="attribute">[textarea:archsite_material_comment:archsite_material_comment]</td>    
+  </tr>
+  <tr>      
+    <td class="label">Artefacts: Pedestal</td>
+    <td class="attribute">[checkbox:archsite_artefacts_pedestal:archsite_artefacts_pedestal]</td>
+  </tr>
+  <tr>      
+    <td class="label">Artefacts: Colonette</td>
+    <td class="attribute">[checkbox:archsite_artefacts_colonette:archsite_artefacts_colonette]</td>
+  </tr>
+  <tr>      
+    <td class="label">Artefacts: Doorframe</td>
+    <td class="attribute">[checkbox:archsite_artefacts_doorframe:archsite_artefacts_doorframe]</td>
+  </tr>
+  <tr>      
+    <td class="label">Artefacts: Statuary</td>
+    <td class="attribute">[checkbox:archsite_artefacts_statuary:archsite_artefacts_statuary]</td>
+  </tr>
+  <tr>      
+    <td class="label">Artefacts: Decorated Blocks</td>
+    <td class="attribute">[checkbox:archsite_artefacts_decorated_blocks:archsite_artefacts_decorated_blocks]</td>
+  </tr>
+  <tr>      
+    <td class="label">Artefacts: Other</td>
+    <td class="attribute">[checkbox:archsite_artefacts_other:archsite_artefacts_other]</td>
+  </tr>
+  <tr>      
+    <td class="label">Artefacts: Comments</td>
+    <td class="attribute">[textarea:archsite_artefacts_comment:archsite_artefacts_comment]</td>
+  </tr>  
+  <tr>      
+    <td class="label">Looted</td>
+    <td class="attribute">[checkbox:archsite_looted:archsite_looted]</td>
+  </tr>
+  <tr>      
+    <td class="label">Cultivated</td>
+    <td class="attribute">[checkbox:archsite_cultivated:archsite_cultivated]</td>
+  </tr>
+  <tr>      
+    <td class="label">Cleared</td>
+    <td class="attribute">[checkbox:archsite_cleared:archsite_cleared]</td>
+  </tr>
+  <tr>      
+    <td class="label">Threatened</td>
+    <td class="attribute">[checkbox:archsite_threatened:archsite_threatened]</td>
+  </tr>
+  <tr>
+    <td class="label">Validated Record (2014 SDG Check)</td>
+    <td class="attribute">[checkbox:archsite_db_resolved:archsite_db_resolved]</td>
+   </tr>
+  <tr>
+    <td class="label">To Be Mapped/Remapped (2014 SDG Check)</td>
+    <td class="attribute">[checkbox:archsite_to_be_remapped:archsite_to_be_remapped]</td>
+   </tr>
+  <tr>
+    <td class="label">New Site To Be Checked (2014 SDG Check)</td>
+    <td class="attribute">[checkbox:archsite_to_be_investigated:archsite_to_be_invesitaged]</td>
+   </tr>  
+  <tr>
+    <td class="label">To Be Deleted (2014 SDG Check)</td>
+    <td class="attribute">[checkbox:archsite_to_be_removed:archsite_to_be_removed]</td>
+   </tr>        
+  <tr>
+    <td class="label">Databasing Comments</td>
+    <td class="attribute">[textarea:archsite_db_comment:archsite_db_comment]</td>
+   </tr>                 
+   <tr>
+    <td class="label">Record Added</td>
+    <td class="attribute">[archsite_added]</td>
+   </tr>
+   <tr>
+    <td class="label">Record Added By</td>
+    <td class="attribute">[dropdown required:archsite_added_by:Who Added This Record:select individual_id,individual_name from individuals ORDER BY individual_name:class="required"]</td>
+   </tr>
+   <tr>
+    <td class="label">Record Modified</td>
+    <td class="attribute">[archsite_modified]</td>
+   </tr>
+   <tr>
+    <td class="label">Record Modified By</td>
+    <td class="attribute">[dropdown required:archsite_modified_by:Who Modified This Record:select individual_id,individual_name from individuals ORDER BY individual_name:class="required"]</td>
+   </tr>
+
+                  
+</table>
+
+<input type="submit" value="Submit" class="button"><input type="button" value="Cancel"  onClick="window.location.href='test.php?archsite_id=[archsite_id]';" class="button" id="cancelbutton">
+
+[end-update]
+</form>
+
+<div id="upbutton"><a href="javascript:void(0)"  title="Return to Top"  onclick="javascript:scrollup();"><img src="images/up.png"/></a></div>
+
+
+</body>
+
+</html>

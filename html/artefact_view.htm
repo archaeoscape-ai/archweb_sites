@@ -1,0 +1,239 @@
+<html>
+     
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>RCRC/GAP Databases</title>
+<link rel="stylesheet" href="styles/backend_style.css" type="text/css" />
+<link rel="icon" 
+      type="image/ico" 
+      href="clipboard.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+     
+</head>
+
+<body>
+
+<h2>RCRC/GAP Databases | View Artefact #[foreach myartefacts getartefact][artefact_id]</h2>
+<p><a href="./.">Home</a> | <a href="artefact_add.php">Add a New Artefact</a> | <a href="artefact_edit.php?artefact_id=[artefact_id]">Edit This Artefact</a></p>
+
+<table>
+<tr>
+  <td>Project</td>
+  <td>[project_name]</td>
+</tr>
+<tr>
+  <td>Material Type</td>
+  <td>[materialtype_name]</td>
+</tr>
+<tr>
+  <td>Ceramic Type</td>
+  <td>[ceramictype_name]</td>
+</tr>
+<tr>
+  <td>Worksite (ID)</td>
+  <td>[worksite_name] ([worksite_id])</td>
+</tr>
+<tr>
+  <td>Artefact Label</td>
+  <td>[artefact_label]</td>
+</tr>
+<tr>
+  <td>Date collected</td>
+  <td>[artefact_date_collected]</td>
+</tr>
+<tr>
+  <td>Context</td>
+  <td>[artefact_context]</td>
+</tr>    
+<tr>
+  <td>Vessel Form</td>
+  <td>[vesselform_name]</td>
+</tr>
+<tr>
+  <td>Vessel Portion</td>
+  <td>[vesselportion_name]</td>
+</tr>
+<tr>
+  <td>Mass (g)</td>
+  <td>[artefact_mass]</td>
+</tr>
+<tr>
+  <td>Minimum Thickness (mm)</td>
+  <td>[artefact_thickness_min]</td>
+</tr>
+<tr>
+  <td>Maximum Thickness (mm)</td>
+  <td>[artefact_thickness_max]</td>
+</tr>
+<tr>
+  <td>Max/Mouth Diameter (mm)</td>
+  <td>[artefact_diameter]</td>
+</tr>
+<tr>
+  <td>Rim everted?</td>
+  <td>[if:artefact_rim_everted:1]Yes[else]No[end-if]</td>
+</tr> 
+<tr>
+  <td>Rim bulge?</td>
+  <td>[if:artefact_rim_bulge:1]Yes[else]No[end-if]</td>
+</tr>
+<tr>
+  <td>Vessel Height (mm)</td>
+  <td>[artefact_height]</td>
+</tr>
+<tr>
+  <td>Paste - Colour</td>
+  <td>[pastecolour_name]</td>
+</tr>
+<tr>
+  <td>Paste - Texture</td>
+  <td>[pastetexture_name]</td>
+</tr>
+<tr>
+  <td>Glaze - Interior</td>
+  <td>[intglazetype_name]</td>
+</tr>
+<tr>
+  <td>Glaze - Exterior</td>
+  <td>[extglazetype_name]</td>
+</tr>
+<tr>
+  <td>Underfired/misfired?</td>
+  <td>[if:artefact_underfired:1]Yes[else]No[end-if]</td>
+</tr> 
+<tr>
+  <td>Moulded?</td>
+  <td>[if:artefact_dec_mould:1]Yes[else]No[end-if]</td>
+</tr> 
+<tr>
+  <td>Incised?</td>
+  <td>[if:artefact_dec_incised:1]Yes[else]No[end-if]</td>
+</tr> 	
+<tr>
+  <td>Carved?</td>
+  <td>[if:artefact_dec_carved:1]Yes[else]No[end-if]</td>
+</tr>
+<tr>
+  <td>Fluted?</td>
+  <td>[if:artefact_dec_fluted:1]Yes[else]No[end-if]</td>
+</tr> 
+<tr>
+  <td>Lobed?</td>
+  <td>[if:artefact_dec_lobed:1]Yes[else]No[end-if]</td>
+</tr>  
+<tr>
+  <td>Chrysanthemum design?</td>
+  <td>[if:artefact_dec_chrysan:1]Yes[else]No[end-if]</td>
+</tr> 
+<tr>
+  <td>Lotus design?</td>
+  <td>[if:artefact_dec_lotus:1]Yes[else]No[end-if]</td>
+	</tr> 
+<tr>
+  <td>Floral scroll design?</td>
+  <td>[if:artefact_dec_fscroll:1]Yes[else]No[end-if]</td>
+</tr> 
+<tr>
+  <td>Stamped/Printed pattern?</td>
+  <td>[if:artefact_dec_stamped:1]Yes[else]No[end-if]</td>
+</tr>
+    
+
+
+<tr>
+  <td>Stacking Ring?</td>
+  <td>[if:artefact_stacking_ring:1]Yes[else]No[end-if]</td>
+</tr>
+<tr>
+  <td>Iron Oxide stain?</td>
+  <td>[if:artefact_rust_stained:1]Yes[else]No[end-if]</td>
+</tr>
+<tr>
+  <td>Base glazed?</td>
+  <td>[if:artefact_baseglaze:1]Yes[else]No[end-if]</td>
+</tr> 
+<tr>
+  <td>Sand crust?</td>
+  <td>[if:artefact_sand_encrusted:1]Yes[else]No[end-if]</td>
+</tr> 
+<tr>
+  <td>Base Diameter (mm)</td>
+  <td>[artefact_footring_diameter]</td>
+</tr>
+<tr>
+  <td>Footring?</td>
+  <td>[if:artefact_footring:1]Yes[else]No[end-if]</td>
+</tr> 
+<tr>
+  <td>Footring Height (mm)</td>
+  <td>[artefact_footring_height]</td>
+</tr>
+<tr>
+  <td>Footring Thickness (mm)</td>
+  <td>[artefact_footring_thickness]</td>
+</tr>
+<tr>
+  <td>Footring inside glazed?</td>
+  <td>[if:artefact_footoutglaze:1]Yes[else]No[end-if]</td>
+</tr>
+<tr>
+  <td>Footring outside glazed?</td>
+  <td>[if:artefact_footinnglaze:1]Yes[else]No[end-if]</td>
+</tr>
+<tr>
+  <td>Footring bottom glazed?</td>
+  <td>[if:artefact_footbotglaze:1]Yes[else]No[end-if]</td>
+</tr>
+<tr>
+  <td>Site of Production</td>
+  <td>[region_name]</td>
+</tr>
+<tr>
+  <td>Date start (year)</td>
+  <td>[artefact_date_start_year]</td>
+</tr>
+<tr>
+  <td>Date end (year)</td>
+  <td>[artefact_date_end_year]</td>
+</tr>
+<tr>
+  <td>Circa?</td>
+  <td>[if:artefact_date_circa:1]Yes[else]No[end-if]</td>
+</tr> 
+<tr>
+  <td>Check?</td>
+  <td>[if:artefact_check:1]Yes[else]No[end-if]</td>
+</tr>
+<tr>
+  <td>Comments</td>
+  <td>[artefact_comments]</td>
+</tr>
+<tr>
+  <td>Container ID</td>
+  <td>[asset_container_id] | <a href="container_view.php?container_id=[asset_container_id]">See What Other Assets are in the Same Container</a></td>   
+</tr>  
+</table>    
+
+<p>
+<table> 
+  
+<tr><h3>Photos</h3></tr>
+
+<tr>
+<th><h3>Interior</h3></th>
+<th><h3>Exterior</h3></th>
+<th><h3>Paste</h3></th>
+</tr>
+<tr>
+<td>[if:artefact_photo_int]<a href="phpthumb/phpThumb.php?src=../myartefactphotos/[artefact_GCS_id]/[artefact_photo_int]" target="_blank"><image src="phpthumb/phpThumb.php?src=../myartefactphotos/[artefact_GCS_id]/[artefact_photo_int]&w=300"></a>[else]Photo Missing[end-if]</td>
+<td>[if:artefact_photo_ext]<a href="phpthumb/phpThumb.php?src=../myartefactphotos/[artefact_GCS_id]/[artefact_photo_ext]" target="_blank"><image src="phpthumb/phpThumb.php?src=../myartefactphotos/[artefact_GCS_id]/[artefact_photo_ext]&w=300"></a>[else]Photo Missing[end-if]</td>
+<td>[if:artefact_photo_paste]<a href="phpthumb/phpThumb.php?src=../myartefactphotos/[artefact_GCS_id]/[artefact_photo_paste]" target="_blank"><image src="phpthumb/phpThumb.php?src=../myartefactphotos/[artefact_GCS_id]/[artefact_photo_paste]&w=300"></a>[else]Photo Missing[end-if]</td>
+[end-foreach]   
+</tr>
+
+</table>
+</p>
+
+</body>
+
+</html>

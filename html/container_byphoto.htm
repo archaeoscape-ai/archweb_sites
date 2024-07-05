@@ -1,0 +1,23 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>RCRC/GAP Databases</title>
+<link rel="stylesheet" href="styles/backend_style.css" type="text/css" />
+<link rel="icon" 
+      type="image/ico" 
+      href="clipboard.ico">
+</head>
+
+<body>
+
+
+[foreach mycontainers viewcontainer:1 order by container_id asc]
+[if:container_photo_name]<a href="container_view.php?container_id=[container_id]" target="_blank"><image src="phpthumb/phpThumb.php?src=../mycontainers/[container_id]&w=300&fltr[literal][][end-literal]=wmt|[container_id]|18|BR|000000|fonts/VERDANA.TTF|100|10|0|EDEDED|100|"></a>[end-if]
+[end-foreach]
+
+
+</body>
+
+</html>
+

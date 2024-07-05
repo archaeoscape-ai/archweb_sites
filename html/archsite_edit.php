@@ -1,0 +1,21 @@
+<?php
+
+require_once('t1000.php');
+
+mysql_connection_localhost_overwrite(DATABASE);
+$template = file_get_contents('archsite_edit.htm');
+$lexer = new Lexer($template);
+$body = new BodyScope($lexer);
+
+$body->verify();
+if ($_REQUEST['_submit']) {
+	$body->input_check();
+	if ($body->satisfied) {
+		$body->execute();
+		header('Location: archsite_liminal.php?archsite_id='.$_REQUEST['archsite_id']);
+	}
+}
+header('Content-type: text/html; utf-8');
+$body->render();
+
+?>

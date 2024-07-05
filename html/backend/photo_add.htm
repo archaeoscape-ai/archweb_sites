@@ -1,0 +1,46 @@
+<html>
+
+
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+
+<link rel="stylesheet" href="../styles/backend_style.css" type="text/css" />
+
+</head>
+[errors]
+<h2>Add Photos</h2>
+<br>
+<table>
+<form action="photo_add.php" method="post" enctype="multipart/form-data">
+[insert showphoto addpicture]
+	<tr>
+		<td>Link to Site</td>
+		<td>[dropdown:photo_site_id:Site:select site_id,site_name from sites ORDER BY site_name]<span class="required">&laquo;</span></td>
+	</tr>
+  <tr>
+		<td>Image</td>
+		<td>[file  :  upload_file  : File : class="file" id="file"]<span class="required">&laquo;</span><span class="tips">Should be landscape, not portrait; and must be a JPG file; must be 800 pixels or more horizontally</span></td>
+	</tr>
+  <tr>
+		<td>Caption</td>
+		<td>[textarea:photo_caption:caption]</td>
+	</tr>
+  <tr>
+    <td>Order</td>
+		<td>[textbox:photo_order:caption]&nbsp;<span class="tips">First photo in order with number "1" will be the default one on the web site</span></td>
+	</tr>
+	<tr>
+		<td>Update</td>
+		<td><input type="submit" value="Submit" class="button"><input type="button" value="Cancel"  onClick="self.location.href='index.php'" class="button"></td>
+	</tr>
+</table>
+[end-insert]
+</form>
+<br />
+
+</body>
+
+</html>

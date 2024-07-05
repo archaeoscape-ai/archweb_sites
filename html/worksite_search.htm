@@ -1,0 +1,158 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles/sidebarstyle.css" type="text/css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+    <script src="scripts/angkorfunctions_worksites.js"></script>
+
+    <script>
+      $(document).ready(function(){
+	       $("tr:odd").addClass("odd");
+      });
+      
+     
+
+      $("input").keypress(function(event) {
+        if (event.which == 13) {
+        event.preventDefault();
+        $("form").submit();
+       }
+      });
+      
+     </script> 
+      
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+</head>
+
+<body>
+<h1>Search for Work Sites</h1>
+<br><br>
+<form action="worksite_search.php">
+
+[search myworksites worksitesearch]
+[dump-vars]
+[if-eq:worksitesearch-searched:"1"]
+  <script>parent.recentsearch = 'http://'+'[this-url]';</script>
+  [if:result-count]
+   <h3>There are [result-count] matching records. Showing results [result-first] to [result-last].</h3>
+   [else]<h3>No records match those criteria</h3>
+  [end-if]
+
+  <div id="searchnav">
+  [if:prev-url]<a class="searchnav" href="[prev-url]">&laquo; Previous Page</a>[end-if]
+  [if:next-url][if:prev-url]  |  [end-if]<a class="searchnav" href="[next-url]">Next Page &raquo;</a>[end-if]
+  </div>
+
+[if:result-count]
+<table>
+  <tr>
+    <td class="label">Work Site ID</td>
+    <td class="label">Name</td>
+    <td class="label">Site Type</td>
+    <td class="label">View</td>
+    <td class="label">Edit</td>
+    <td class="label">Map</td>
+  </tr>
+[end-if]
+  [foreach myworksites getworksite: 1 order by worksite_id asc]
+  <tr>
+    <td>[worksite_id]</td>
+    <td><a href="worksite_view.php?worksite_id=[worksite_id]">[worksite_name]</a></td>
+    <td>[worksitetype_name]</td>
+    <td class="maplink"><a href="javascript:void(0)" onclick="parent.sidecontent('worksite_view.php?worksite_id=[worksite_id]')" title="View Record"><img src="images/view_sm.png"/></a></td>
+    <td class="maplink"><a href="javascript:void(0)" onclick="parent.sidecontent('worksite_edit.php?worksite_id=[worksite_id]')" title="Edit Record"><img src="images/edit_sm.png"/></a></td>
+    <td class="maplink"><a href="javascript:void(0)" onclick="parent.maphighlight('[worksite_id]')" title="Show on Map"><img src="images/rightarrow.png"/></a></td>
+  </tr>
+  [end-foreach]
+[if:result-count]
+</table>
+[end-if]
+    
+<input type="submit" value="Search" class="button"><input type="button" value="Reset"  onClick="window.location.href='worksite_search.php';" class="button" id="topcancelbutton">
+[end-if-eq]
+<table>
+  <tr>
+    <td class="label">Work Site ID</td>
+    <td class="attribute">[textbox :worksite_id:worksite_id]</td>
+  </tr>
+  <tr>
+    <td class="label">Name</td>
+    <td class="attribute">[textbox :worksite_name:Name of the Site]</td>
+  </tr>
+  <tr> 
+    <td class="label">Site Type</td>
+    <td class="attribute">[dropdown: worksite_sitetype:worksite_sitetype:select worksitetype_id,worksitetype_name from worksitetypes ORDER BY worksitetype_name]</td>
+  </tr>
+    <tr> 
+    <td class="label">Work Method</td>
+    <td class="attribute">[dropdown :worksite_method:Type of Work Method:select worksitemethod_id,worksitemethod_name from worksitemethods ORDER BY worksitemethod_id]</td>
+  </tr>
+   <tr>
+    <td class="label" cols>Archsite ID</td>
+    <td class="attribute">[textbox:worksite_archsite_id:worksite_archsite_id]</td>
+  </tr>  
+   <tr>
+    <td class="label" cols>GCS ID</td>
+    <td class="attribute">[textbox:worksite_GCS_id:worksite_GCS_id]</td>
+  </tr>  
+   <tr>
+    <td class="label">Latitude<a href="#coordsection"></a></td>
+    <td class="attribute">[textbox :worksite_latitude:Latitude of the Site in DD WGS84]</td>
+  </tr>
+  <tr>
+    <td class="label">Longitude</td>
+    <td class="attribute">[textbox :worksite_longitude:Longitude of the Site in DD WGS84]</td>
+   </tr>
+  <tr>      
+    <td class="label">Looted</td>
+    <td class="attribute">[checkbox:worksite_looted:worksite_looted]</td>
+  </tr>
+  <tr>      
+    <td class="label">Cultivated</td>
+    <td class="attribute">[checkbox:worksite_cultivated:worksite_cultivated]</td>
+  </tr>
+  <tr>      
+    <td class="label">Cleared</td>
+    <td class="attribute">[checkbox:worksite_cleared:worksite_cleared]</td>
+  </tr>
+  <tr>      
+    <td class="label">Threatened</td>
+    <td class="attribute">[checkbox:worksite_threatened:worksite_threatened]</td>
+  </tr>
+   <tr>
+    <td class="label">Record Added</td>
+    <td class="attribute">[textbox:worksite_added:worksite_added]</td>
+   </tr>
+   <tr>
+    <td class="label">Record Added By</td>
+    <td class="attribute">[dropdown: worksite_added_by:Who Added This Record:select individual_id,individual_name from individuals ORDER BY individual_name]</td>
+   </tr>
+   <tr>
+    <td class="label">Record Modified</td>
+    <td class="attribute">[textbox:worksite_modified:worksite_modified]</td>
+   </tr>
+   <tr>
+    <td class="label">Record Modified By</td>
+    <td class="attribute">[dropdown:worksite_modified_by:Who Modified This Record:select individual_id,individual_name from individuals ORDER BY individual_name]</td>
+   </tr>
+
+                  
+</table>
+
+<input type="submit" value="Search" class="button"><input type="button" value="Reset"  onClick="window.location.href='worksite_search.php';" class="button" id="cancelbutton">
+
+
+</form>
+
+
+
+
+[end-search]
+
+<div id="upbutton"><a href="javascript:void(0)"  title="Return to Top"  onclick="javascript:scrollup();"><img src="images/up.png"/></a></div>
+
+
+</body>
+
+</html>

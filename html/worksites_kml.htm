@@ -1,0 +1,18 @@
+<kml xmlns="http://earth.google.com/kml/2.0"> 
+
+<Document>
+
+[foreach myworksites listing]
+  <Placemark>
+    <name>[worksite_id]</name>
+    <description>[worksite_name]</description>
+    <Point>
+      <coordinates>
+        [worksite_longitude], [worksite_latitude], 0.
+      </coordinates>
+    </Point>
+  </Placemark>
+[end-foreach] 
+
+</Document> 
+</kml>

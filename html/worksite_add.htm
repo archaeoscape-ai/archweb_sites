@@ -1,0 +1,94 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles/sidebarstyle.css" type="text/css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+    <script src="scripts/angkorfunctions_worksites.js"></script>
+
+    <script>
+      $(document).ready(function(){
+	       $("tr:odd").addClass("odd");
+      });
+    </script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+</head>
+
+<body onunload="parent.cleargeo()">
+
+<form action="worksite_add.php" method="post" enctype="multipart/form-data">
+
+[insert required myworksites editsite]
+
+<h1>Add New Site</h1>
+<br/><br/>
+
+[errors]
+
+<table>
+  <tr>
+    <td class="label">Name</td>
+    <td class="attribute">[textbox required:worksite_name:Name of the Site:class="required"]</td>
+  </tr>
+  <tr>
+    <td class="label" cols>Site Code</td>
+    <td class="attribute">[textbox:worksite_code:worksite_code]</td>
+  </tr> 
+  <tr> 
+    <td class="label">Site Type</td>
+    <td class="attribute">[dropdown required:worksite_sitetype:Type of Work Site:select worksitetype_id,worksitetype_name from worksitetypes ORDER BY worksitetype_name:class="required"]</td>
+  </tr>
+  <tr> 
+    <td class="label">Work Method</td>
+    <td class="attribute">[dropdown required:worksite_method:Type of Work Method:select worksitemethod_id,worksitemethod_name from worksitemethods ORDER BY worksitemethod_id:class="required"]</td>
+  </tr>
+   <tr>
+    <td class="label" cols>Archsite ID</td>
+    <td class="attribute">[textbox:worksite_archsite_id:worksite_archsite_id]</td>
+  </tr>
+   <tr>
+    <td class="label" cols>GCS ID</td>
+    <td class="attribute">[textbox:worksite_GCS_id:worksite_GCS_id]</td>
+  </tr>   
+   <tr>
+    <td class="label">Latitude<a href="#coordsection"></a></td>
+    <td class="attribute">[textbox required:worksite_latitude:Latitude of the Site in DD WGS84:class="required" id="latbox"]</td>
+  </tr>
+  <tr>
+    <td class="label">Longitude</td>
+    <td class="attribute">[textbox required:worksite_longitude:Longitude of the Site in DD WGS84:class="required" id="longbox"]</td>
+   </tr>
+  <tr>      
+    <td class="label">Looted</td>
+    <td class="attribute">[checkbox:worksite_looted:worksite_looted]</td>
+  </tr>
+  <tr>      
+    <td class="label">Cultivated</td>
+    <td class="attribute">[checkbox:worksite_cultivated:worksite_cultivated]</td>
+  </tr>
+  <tr>      
+    <td class="label">Cleared</td>
+    <td class="attribute">[checkbox:worksite_cleared:worksite_cleared]</td>
+  </tr>
+  <tr>      
+    <td class="label">Threatened</td>
+    <td class="attribute">[checkbox:worksite_threatened:worksite_threatened]</td>
+  </tr>
+   <tr>
+    <td class="label">Record Added By</td>
+    <td class="attribute">[dropdown required:worksite_added_by:Who Added This Record:select individual_id,individual_name from individuals ORDER BY individual_name:class="required"]</td>
+   </tr>                
+</table>
+
+<input type="submit" value="Submit" class="button"><input type="button" value="Cancel"  onClick="window.location.href='worksite_search.php';" class="button" id="cancelbutton">
+
+[end-insert]
+</form>
+
+<div id="upbutton"><a href="javascript:void(0)"  title="Return to Top"  onclick="javascript:scrollup();"><img src="images/up.png"/></a></div>
+
+
+</body>
+
+</html>

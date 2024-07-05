@@ -1,0 +1,18 @@
+<kml xmlns="http://earth.google.com/kml/2.0"> 
+
+<Document>
+
+[foreach myarchsites listing]
+  <Placemark>
+    <name>[archsite_id]</name>
+    <description>[archsite_name_en]</description>
+    <Point>
+      <coordinates>
+        [archsite_longitude], [archsite_latitude], 0.
+      </coordinates>
+    </Point>
+  </Placemark>
+[end-foreach] 
+
+</Document> 
+</kml>

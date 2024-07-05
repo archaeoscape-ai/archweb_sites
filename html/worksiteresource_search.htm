@@ -1,0 +1,116 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>RCRC/GAP Databases</title>
+<link rel="stylesheet" href="styles/backend_style.css" type="text/css" />
+<link rel="stylesheet" href="styles/bluetheme.css" type="text/css"/>
+<link rel="icon" 
+      type="image/ico" 
+      href="clipboard.ico">
+</head>
+<body>
+
+
+
+
+
+<!-- Search form -->
+<form action="worksiteresource_search.php">
+[search myworksiteresources resourcesearch]
+
+<h3>RCRC/GAP Databases | Search Worksite Resources</h3>
+
+<table>
+  <tr>
+		<td>Worksite ID</td>
+		<td>[dropdown required:worksiteresource_worksite_id:worksiteid:select worksite_id,worksite_id from worksites ORDER BY worksite_id]<span class="required">&laquo;</span></td>
+	</tr>  
+
+  <tr>
+		<td>Resource Type</td>
+		<td>[dropdown required:worksiteresource_type:resourcetype:select worksiteresource_type_id,worksiteresource_type_name from worksiteresource_types ORDER BY worksiteresource_type_id]<span class="required">&laquo;</span></td>
+	</tr>
+  <tr>
+		<td>Field Season</td>
+		<td>[dropdown required:worksiteresource_fieldseason:fieldseason:select fieldseason_id,fieldseason_name from fieldseasons ORDER BY fieldseason_name]<span class="required">&laquo;</span></td>
+	</tr>
+  <tr>
+		<td>Trench #</td>
+		<td>[dropdown:worksiteresource_trench:trench:select trench_id,trench_name from trenches ORDER BY trench_id]</td>
+	</tr>
+  <tr>
+		<td>Context</td>
+		<td>[textbox:worksiteresource_context:context]</td>
+	</tr>
+     <tr>
+		<td>Caption</td>
+		<td>[textbox:worksiteresource_caption:caption]</td>
+	</tr>
+   
+	<tr>
+		<td></td>
+		<td><input type="submit" value="Search" class="button"><input type="button" value="Reset"  onClick="self.location.href='worksiteresource_search.php'" class="button"></td>
+	</tr>
+</table>
+</form>
+<!-- End Search form -->
+
+[if-eq:resourcesearch-searched:"1"]
+
+  [if:result-count]
+   <h3>There are [result-count] matching records. Showing results [result-first] to [result-last].</h3>
+   [else]<h3>No records match those criteria</h3>
+  [end-if]
+
+  [if:prev-url]<a class="searchnav" href="[prev-url]">&laquo; Previous Page</a>[end-if]
+  [if:next-url][if:prev-url]  |  [end-if]<a class="searchnav" href="[next-url]">Next Page &raquo;</a>[end-if]
+
+
+<table>
+ <thead>
+  <tr class="title">
+    <th style="min-width:80px">Resource ID</th>
+	<th>Site Name</th>
+    <th>Resource Type</th>
+    <th>Field Season</th>
+    <th>Trench #</th>
+    <th>Context</th>
+	<th>Caption</th>
+    <th>Photo</th>   
+  </tr>
+ </thead>
+ <tbody> 
+[foreach myworksiteresources getcomponent: 1 order by worksiteresource_id asc]
+  <tr>
+    <td><a class="recordtitle" href="worksiteresource_view.php?worksiteresource_id=[worksiteresource_id]">[worksiteresource_id]<br><br><img src="images/link.png"/></a></td>
+    <td>[worksite_name]</td>
+	<td>[worksiteresource_type_name]</td>
+    <td>[fieldseason_name]</td>
+    <td>[trench_name]</td>
+    <td>[worksiteresource_context]</td>
+	<td>[worksiteresource_caption]</td>
+    <td>[if:worksiteresource_file_name]<a href="../databases/myworksiteresources/[worksiteresource_worksite_id]/[worksiteresource_file_name]" target="_blank"><image src="phpthumb/phpThumb.php?src=../myworksiteresources/[worksiteresource_worksite_id]/[worksiteresource_file_name]&w=250"></a>[else]Photo Missing[end-if]</td>
+  </tr>
+[end-foreach]
+  </tbody>
+</table>
+
+  [if:result-count]
+   <h3>There are [result-count] matching records. Showing results [result-first] to [result-last].</h3>
+   [else]<h3>No records match those criteria</h3>
+  [end-if]
+
+  [if:prev-url]<a class="searchnav" href="[prev-url]">&laquo; Previous Page</a>[end-if]
+  [if:next-url][if:prev-url]  |  [end-if]<a class="searchnav" href="[next-url]">Next Page &raquo;</a>[end-if]
+  <br><br>
+
+[end-if-eq]
+ 
+[end-search]
+
+
+
+
+</body>  
+</html>

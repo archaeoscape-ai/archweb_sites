@@ -1,0 +1,625 @@
+
+
+BODY {
+background-color : #FFFFFF;
+font-family : Verdana, Arial, sans-serif;
+font-size:  10px;
+margin: 20px;
+}
+
+/*
+
+div {
+
+background-color : #FFFFFF;
+padding: 0px;
+margin: 0px;
+
+}
+
+*/
+
+#mainleft {
+width:49%;
+float:left;
+padding-bottom:10px;
+	}
+
+#mainright {
+width:49%;
+float:right;
+padding-bottom:10px;
+	}
+
+input {
+
+height: 18px;
+font-family : Verdana, Arial, sans-serif;
+font-size:  10px;
+font-weight: normal;
+
+}
+
+input.textbox {
+
+width: 350px;
+
+}
+
+
+input submit {
+
+height: 25px;
+font-family : Verdana, Arial, sans-serif;
+font-size:  10px;
+font-weight: normal;
+
+}
+
+
+
+
+
+select {
+
+height: 18px;
+font-family : Verdana, Arial, sans-serif;
+font-size:  10px;
+font-weight: normal;
+
+}
+
+textarea {
+
+width: 350px;
+height: 150px;
+font-family : Verdana, Arial, sans-serif;
+font-size:  10px;
+font-weight: normal;
+
+}
+
+
+h1 {
+
+
+	}
+
+
+h2 {
+
+font-family : Verdana, Arial, sans-serif;
+font-size:  18px;
+font-weight: bold;
+vertical-align: middle;
+margin-bottom: 0px;
+margin-top: 0px;
+margin-left: 0px;
+margin-right: 0px;
+
+	}
+
+
+h3 {
+
+font-family : Verdana, Arial, sans-serif;
+font-size:  14px;
+font-weight: bold;
+
+	}
+
+
+h4 {
+
+font-weight: bold;
+font-size:  14px;
+margin-bottom: 0px;
+margin-top: 0px;
+margin-left: 0px;
+margin-right: 0px;
+
+	}
+
+a {
+	text-decoration: none;
+	}
+
+a:link {
+	color: #6699CC;
+	}
+
+a:visited {
+	color: #6699CC;
+	}
+
+a:active {
+	color: #6699CC;
+	}
+
+a:hover {
+	color: #003366;
+	}
+
+
+a.recordtitle {
+
+font-weight: bold;
+    display:block;
+    text-decoration:none;
+
+}
+
+a#divtoggler {
+
+color: #FF0000; 
+
+}
+
+a.searchnav {
+ font-weight: bold;
+ font-size:  12px;
+ text-decoration:none;
+
+}
+
+
+
+table {
+
+font-family : Verdana, Arial, sans-serif;
+font-size:  10px;
+color: #000000;
+border: 1px dotted #000000;
+empty-cells:show;
+}
+
+td {
+
+border: 1px dotted #BFBFBF;
+padding:4px;
+
+}
+
+th {
+
+border: 1px dotted #BFBFBF;
+padding:4px;
+text-align: left;
+font-weight: bold;
+}
+
+td div {
+   max-width: 150px;
+   overflow:auto;    
+   white-space: nowrap;
+   width: 100%;    
+}
+
+
+td div::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+td div::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+td div::-webkit-scrollbar-track { 
+    background-color: #fff; 
+    border-radius: 8px; 
+} 
+
+td div::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+
+
+
+/* the following 2 rules are recognized only by IE */
+	
+* html body table	
+  {
+border: 1px solid #000000;
+  }
+
+* html body td	
+  {
+border: 1px solid #BFBFBF;
+  }
+
+.title {
+
+  font-weight: bold;
+  background-color : #DEDEDE;
+
+}
+
+.navbar {
+
+margin: 0px;
+border: none;
+font-weight: bold;
+font-style: italic;
+	}
+
+.header {
+  background-color : #F5F6FA;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 20px;
+  margin-right: 20px;
+
+	}
+
+.relspec {
+
+font-style: italic;
+font-weight: bold;
+font-size:  14px;
+
+	}
+
+.activebox {
+	border: 1px dashed #6699CC;
+	cursor: pointer;
+}
+
+.popupbox {
+	border: 1px dashed #FF0000;
+	cursor: pointer;
+	width: 30px;
+}
+
+
+.linktable {
+
+margin: 0px;
+border-style: none;
+background-color : #FFFFFF;
+width: 100%;
+height: 200px;
+
+}
+
+.linktable2 {
+
+margin: 0px;
+border-style: none;
+background-color : #FFFFFF;
+width: 100%;
+height: 450px;
+
+}
+
+.workflow {
+
+margin: 0px;
+border-style: none;
+background-color : #FFFFFF;
+width: 100%;
+height: 30px;
+
+}
+
+.popup {
+
+margin: 0px;
+border-style: none; 
+background-color : #FFFFFF;
+
+}
+
+#popupwindow {
+
+border: 2px solid #FF0000;
+
+}
+
+.button {
+
+/* border: 2px solid #000000; */
+height: 18px;
+margin-right: 1px;
+margin-left: 1px;
+font-weight: bold;
+color: #6699CC;
+vertical-align: top;
+cursor: pointer;
+
+}
+
+.checkbox {
+
+margin: 0px;
+height: 12px;
+
+}
+
+.wfcheckbox {
+
+margin: 0px;
+height: 12px;
+
+}
+
+.red {
+
+color: #FF0000;
+font-weight: bold;
+
+}
+
+.redcell {
+
+}
+
+
+.hidden {
+
+height: 0px;
+width: 0px;
+margin: 0px;
+visibility: hidden;
+
+}
+
+.inlineformelement {
+
+margin: 0px;
+padding: 0px;
+
+width: 60px;
+}
+
+.inlinemainelement {
+
+margin: 0px;
+padding: 0px;
+
+}
+
+.inline {
+
+margin: 0px;
+padding: 0px;
+border-style: none; 
+width: 100%;
+height: 22px;
+vertical-align: top;
+}
+
+.tips {
+
+font-style: italic;
+font-weight: normal;
+
+}
+
+.required {
+
+color: #FF0000; 
+font-size:  14px;
+margin-right: 5px;
+margin-left: 5px;
+margin-top: 0px;
+margin-bottom: 0px;
+vertical-align: middle;
+
+}
+
+.extendedheight {
+
+	height: 250px;
+
+}
+
+
+
+a.popupmessage, .popupmessage {
+
+color: #FF0000; 
+
+}
+
+
+ /* PORTAL */
+ 
+div#portal table {
+
+font-family : Verdana, Arial, sans-serif;
+font-size:  10px;
+color: #000000;
+border: none;
+empty-cells:show;
+}
+
+
+div#portal td {
+ border: none;
+}
+
+
+div#portal {
+  padding-top: 20px;
+  width: 50%;
+  margin-left: 100px ;
+  margin-right: auto ;
+}
+
+div#portal h3 {
+  text-align:center;  
+}
+
+div#portal h2 {
+  margin-left: 50px;  
+}
+
+ /* SCROLLBAR HACK FOR MAC */
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}            
+
+::-webkit-scrollbar-track { 
+    background-color: #fff; 
+    border-radius: 8px; 
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 11px;
+} 
+
+
+ /* CENTERED LOADING GIF */
+
+#loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -175px; /* -1 * image width / 2 */
+    margin-top: -175px;  /* -1 * image height / 2 */
+    display: block;    
+}
+
+
+
+ /* google maps */
+
+#map-canvas { 
+  height: 100% 
+}
+
+
+.infodiv {
+  line-height:1.35;
+  overflow:hidden;
+  white-space:nowrap;
+}
+
+
+ /* left map menu */
+
+#sidebar {
+    position: absolute;
+    left: -400px;
+    top: 0px;
+    z-index: 99;
+    background-color: #d9d9d9;
+    height: 100%;
+    width: 400px;
+    overflow:auto;
+    overflow-x: hidden; 
+}
+
+#sidebarcontentholder {
+    z-index:49;
+    position: absolute;
+    left: 0px;
+    top: 45px;
+    padding:0px;
+    margin:0px;
+    height: 100%;
+    width: 400px;
+}
+
+
+#sidebarcontent {
+  width:380px;
+  border:none;
+  margin:0px;
+  padding:10px;
+  background-color:#ebebeb;
+}
+
+
+#menubutton {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 100;
+    margin-top: 6px;
+    margin-left: 10px;
+}
+
+div#sidetoolbar {
+    width: 400px;
+    height: 45px;
+    position: fixed;
+    left: -400px;
+    top: 0px;
+    background-color:#d9d9d9;
+    z-index: 50;
+}
+
+div.toolbarbutton {
+    float:left;
+    width:32px;
+    margin-top: 6px;
+    margin-left: 20px;
+}
+
+div#geodiv { 
+    position:absolute;
+    height:45px;
+    left:400px;
+    top: 0px;
+    width:200px;
+    z-index: 1000;
+    text-align:center;
+    background-color: #d9d9d9;
+    display:none; 
+}
+
+div#geolocator {
+  width:155px;
+  height:45px;
+  margin:0px;
+  padding:0px;
+  float:left;
+}
+
+div#geobutton {
+   width:45px;
+   height:39px;
+   margin:0px;
+   padding:0px;
+   float:right;
+   margin-top:6px;
+}
+
+
+div#geolocator p {
+  font-family : Verdana, Arial, sans-serif;
+  font-size:  10px;
+  font-weight: bold;
+  margin: 0px;
+  margin-left: 15px;
+  margin-top:6px;
+  text-align:left;
+}
+
+div#test {
+  position:absolute;
+  left:600px;
+  z-index:1001;
+}
+
+div#myimages {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 1000000;
+  background-color: none;
+  opacity: 0.4;
+  pointer-events: none;  
+}

@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles/sidebarstyle.css" type="text/css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+    <script src="scripts/angkorfunctions.js"></script>
+
+    <script>
+      $(document).ready(function(){
+	       $("tr:odd").addClass("odd");
+      });
+    
+    var projects = [literal][[end-literal]"",[foreach myprojects getproject:1 order by project_id]"[project_name]",[end-foreach][literal]][end-literal];
+    var people = [literal][[end-literal]"",[foreach myindividuals getperson:1 order by individual_id]"[individual_name]",[end-foreach][literal]][end-literal];
+    
+ [select myworksites getsite]
+          
+     parent.updatemap('[worksite_id]');
+     
+         
+    
+    </script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+</head>
+
+<body>
+
+<h1>[worksite_id]: [worksite_name]</h1>
+<br><br>
+<h1>Database successfully updated.</h1>
+<input type="button" value="Back to Site"  onClick="window.location.href='worksite_view.php?worksite_id=[worksite_id]';" class="button" id="cancelbutton">
+
+[end-select]
+
+
+
+</body>
+
+</html>

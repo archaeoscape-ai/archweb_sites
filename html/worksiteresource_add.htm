@@ -1,0 +1,87 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles/sidebarstyle.css" type="text/css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+    <script src="scripts/angkorfunctions.js"></script>
+
+    <script>
+      $(document).ready(function(){
+	       $("tr:odd").addClass("odd");
+      });
+    </script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+</head>
+
+<body>
+
+<form action="worksiteresource_add.php" method="post" enctype="multipart/form-data">
+
+[insert required myworksiteresources addresource]
+
+<h1>Add New Resource</h1>
+<br/><br/>
+
+[errors]
+[dump-vars]
+
+<table>
+  <tr>
+    <td class="label">Linked Site ID</td>
+    <td class="attribute">[textbox:worksiteresource_worksite_id:worksite_id: class="disabled" readonly]</td>
+  </tr>
+  <tr>
+    <td class="label">Caption</td>
+    <td class="attribute">[textarea:worksiteresource_caption:Caption]</td>
+  </tr>
+  <tr>
+    <td class="label">Type of Resource</td>
+    <td class="attribute">[dropdown required:worksiteresource_type:Type:select worksiteresource_type_id,worksiteresource_type_name from worksiteresource_types ORDER BY worksiteresource_type_name:class="required"]</td>
+  </tr>  
+  <tr>
+    <td class="label">Project</td>
+    <td class="attribute">[dropdown required:worksiteresource_project:Project:select project_id,project_name from projects ORDER BY project_name:class="required"]</td>
+  </tr>
+  <tr>
+    <td class="label">Field Season</td>
+    <td class="attribute">[dropdown required:worksiteresource_fieldseason:Field Season:select fieldseason_id,fieldseason_name from fieldseasons ORDER BY fieldseason_name:class="required"]</td>
+  </tr>
+  <tr>
+    <td class="label">Context</td>
+    <td class="attribute">[textarea:worksiteresource_context:Context]</td>
+  </tr>  
+   <tr>
+    <td class="label">Date & Time</td>
+    <td class="attribute">[textbox:worksiteresource_date:Date and Time]</td>
+  </tr>   
+  <tr>
+    <td class="label">Added By</td>
+    <td class="attribute">[dropdown required:worksiteresource_added_by:Added By:select individual_id,individual_name from individuals ORDER BY individual_name:class="required"]</td>
+  </tr>
+  <tr>
+    <td class="label">Notes</td>
+    <td class="attribute">[textarea:worksiteresource_notes:Notes]</td>
+  </tr>
+  <tr>
+    <td class="label">Sort Order</td>
+    <td class="attribute">[textbox:worksiteresource_sortorder:Sort Order]</td>
+  </tr>    
+  <tr>
+	<td class="label">Resource File</td>
+		<td class="label">[file required:  upload_file  : File : class="file" id="file"]</td>
+	</tr>               
+</table>
+
+<input type="submit" value="Submit" class="button"><input type="button" value="Cancel" class="button" id="cancelbutton" onclick="javascript:history.back()">
+
+[end-insert]
+</form>
+
+<div id="upbutton"><a href="javascript:void(0)"  title="Return to Top"  onclick="javascript:scrollup();"><img src="images/up.png"/></a></div>
+
+
+</body>
+
+</html>

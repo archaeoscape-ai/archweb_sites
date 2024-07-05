@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    
+    <title>RCRC/GAP Databases</title>
+    <link rel="stylesheet" href="styles/backend_style.css" type="text/css" />
+    <link rel="icon" type="image/ico" href="clipboard.ico"> 
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+    </style>
+
+    
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD01qFbsDIIy-yT9rAEjgKnFQINKgGhXw">
+    </script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script> 
+    <script src="scripts/angkorfunctions.js"></script>
+    <script type="text/javascript" src="scripts/ExtDraggableObject.js"></script>
+    <script type="text/javascript" src="scripts/CustomTileOverlay.js"></script>
+
+
+    <link rel="stylesheet" href="scripts/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="scripts/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <script type="text/javascript" src="scripts/jquery.mousewheel-3.0.6.pack.js"></script>
+    <link rel="stylesheet" href="scripts/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="scripts/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+    <script type="text/javascript" src="scripts/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+    <link rel="stylesheet" href="scripts/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+    <script type="text/javascript" src="scripts/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
+
+[literal]
+
+ 
+    <script type="text/javascript">
+      $(document).ready(function(){
+         $(".fancybox").fancybox({type : "image"});       
+      });
+     </script>
+   
+    <script type="text/javascript"> 
+
+      var map, overlay;
+      var OPACITY_MAX_PIXELS = 57; // Width of opacity control image
+      var sidebarstate = 'off';
+      var recentsearch = 'archsite_search.php';
+      var mysites=[];
+      var imagered = 'images/redpoint.png';
+      var imagegreen = 'images/greenpoint.png';
+      var imagereticle = 'images/reticle.png';
+      var infowindow = new google.maps.InfoWindow(), marker, i;
+      var myMarker = new google.maps.Marker();
+      var boundaryLayer = new google.maps.KmlLayer({
+          url: 'http://localhost/assets/kh/boundary.kmz', preserveViewport: true
+        });              
+      var ajaxurl = 'archsites_xml.php';
+
+
+		function createOpacityControl(map, opacity) {
+			var sliderImageUrl = "images/opacity-slider3d14.png";
+			
+			// Create main div to hold the control.
+			var opacityDiv = document.createElement('DIV');
+			opacityDiv.setAttribute("style", "margin:5px;overflow-x:hidden;overflow-y:hidden;background:url(" + sliderImageUrl + ") no-repeat;width:71px;height:21px;cursor:pointer;");
+
+			// Create knob
+			var opacityKnobDiv = document.createElement('DIV');
+			opacityKnobDiv.setAttribute("style", "padding:0;margin:0;overflow-x:hidden;overflow-y:hidden;background:url(" + sliderImageUrl + ") no-repeat -71px 0;width:14px;height:21px;");
+			opacityDiv.appendChild(opacityKnobDiv);
+
+			var opacityCtrlKnob = new ExtDraggableObject(opacityKnobDiv, {
+				restrictY: true,
+				container: opacityDiv
+			});
+
+			google.maps.event.addListener(opacityCtrlKnob, "dragend", function () {
+				setOpacity(opacityCtrlKnob.valueX());
+			});
+
+			google.maps.event.addDomListener(opacityDiv, "click", function (e) {
+				var left = findPosLeft(this);
+				var x = e.pageX - left - 5; // - 5 as we're using a margin of 5px on the div
+				opacityCtrlKnob.setValueX(x);
+				setOpacity(x);
+			});
+
+			map.controls[google.maps.ControlPosition.TOP_RIGHT].push(opacityDiv);
+
+			// Set initial value
+			var initialValue = OPACITY_MAX_PIXELS / (100 / opacity);
+			opacityCtrlKnob.setValueX(initialValue);
+			setOpacity(initialValue);
+		}
+
+		function setOpacity(pixelX) {
+			// Range = 0 to OPACITY_MAX_PIXELS
+			var value = (100 / OPACITY_MAX_PIXELS) * pixelX;
+			if (value < 0) value = 0;
+			if (value == 0) {
+				if (overlay.visible == true) {
+					overlay.hide();
+				}
+			}
+			else {
+				overlay.setOpacity(value);
+				if (overlay.visible == false) {
+					overlay.show();
+				}
+			}
+		}
+
+		function findPosLeft(obj) {
+			var curleft = 0;
+			if (obj.offsetParent) {
+				do {
+					curleft += obj.offsetLeft;
+				} while (obj = obj.offsetParent);
+				return curleft;
+			}
+			return undefined;
+		}  
+      
+      function updatemap(id){
+        infowindow.close();
+        for (i = 0; i < mysites.length; i++) {
+            mysites[i].marker.setMap(null);;
+        }
+        mysites=[];
+        getXml(ajaxurl, id);        
+      }
+
+
+      function maphighlight(id){
+        infowindow.close();
+        for (i = 0; i < mysites.length; i++) {  
+          if (mysites[i].site_id == id) {
+            google.maps.event.addListener(mysites[i].marker, 'click', (function(marker, i) {
+            return function() {
+              var mycontent = '<div class="infodiv"><a href="javascript:void(0)" onclick="sidecontent(\'archsite_view.php?archsite_id=' + mysites[i].site_id + '\')">' + mysites[i].site_id + ' - ' + mysites[i].site_name + '</a></div>';
+              infowindow.setContent(mycontent);
+              infowindow.open(map, mysites[i].marker);
+            }        
+            })(marker, i));
+            google.maps.event.trigger(mysites[i].marker, 'click');
+            map.setCenter(mysites[i].marker.position);
+          }
+        }        
+      }
+             
+
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(13.44, 104.66),
+          zoom: 10,
+          streetViewControl: false,
+          overviewMapControl: false,
+          panControl: false,
+          controlSize: 25,
+          mapTypeId: google.maps.MapTypeId.TERRAIN,
+          zoomControlOptions: {
+            position: google.maps.ControlPosition.TOP_RIGHT, 
+            style: google.maps.ZoomControlStyle.SMALL
+          },
+          mapTypeControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_BOTTOM    
+          }
+        };
+      map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+      
+      
+      var initialOpacity = 40;
+        
+      
+      // This is the part that adds the Angkor tiles
+      overlay = new CustomTileOverlay(map, initialOpacity);
+      overlay.show();
+
+
+     
+       // https://developers.google.com/maps/documentation/javascript/examples/maptype-image-overlay
+        
+        var mapBounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(12.775902792979, 104.83946000322),
+            new google.maps.LatLng(12.998521440199, 105.21398884541));
+        var mapMinZoom = 1;
+        var mapMaxZoom = 18;
+        
+        
+        var imageMapType = new google.maps.ImageMapType({
+            getTileUrl: function(coord, zoom) {
+              var proj = map.getProjection();
+              var z2 = Math.pow(2, zoom);
+              var tileXSize = 256 / z2;
+              var tileYSize = 256 / z2;
+              var tileBounds = new google.maps.LatLngBounds(
+                proj.fromPointToLatLng(new google.maps.Point(coord.x * tileXSize, (coord.y + 1) * tileYSize)),
+                proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * tileXSize, coord.y * tileYSize))
+              );
+              if (!mapBounds.intersects(tileBounds) || zoom < mapMinZoom || zoom > mapMaxZoom) return null;
+              return "http://angkordata.net/databases/maptiles/tileserver.php?/index.json?/spkmap/{z}/{x}/{y}.png".replace('{z}',zoom).replace('{x}',coord.x).replace('{y}',coord.y);
+            },
+            tileSize: new google.maps.Size(256, 256),
+            minZoom: mapMinZoom,
+            maxZoom: mapMaxZoom,
+            opacity: 0.5,
+            name: 'Tiles'
+        });
+
+        map.overlayMapTypes.push(imageMapType);
+        //map.fitBounds(mapBounds);
+
+
+
+
+      google.maps.event.addListener(map, 'tilesloaded', function () {
+        //alert('tilesloaded');
+        overlay.deleteHiddenTiles(map.getZoom());
+      });
+      
+      
+      createOpacityControl(map, initialOpacity);
+          
+      
+      // Load the KML files here
+      boundaryLayer.setMap(map);
+      
+      loader('on');
+      getXml(ajaxurl);
+      
+      }
+      
+      
+    function getcoords(state) {
+    
+        $( "#geodiv" ).slideDown( "fast" );
+    
+    
+        if (myMarker) {
+          //alert('already');
+          myMarker.setMap(null);  
+        }
+    
+        var middlemap = map.getCenter();
+        //alert(middlemap);
+        myMarker = new google.maps.Marker({
+        position: middlemap,
+        icon: imagereticle,
+        draggable: true
+      });
+      
+      google.maps.event.addListener(myMarker, 'dragend', function(evt){
+        document.getElementById('geolocator').innerHTML = '<p id="newlat">' + evt.latLng.lat().toFixed(6) + '</p><p id="newlong">' + evt.latLng.lng().toFixed(6) + '</p>';
+      });
+
+      google.maps.event.addListener(myMarker, 'dragstart', function(evt){
+        document.getElementById('geolocator').innerHTML = '<p>Moving...</p>';
+      });   
+      
+      //map.setCenter(myMarker.position);
+      myMarker.setMap(map);
+      
+      
+      }
+      
+      function populatecoords() {
+          
+         var mynewlat = document.getElementById('newlat').innerHTML;
+         var mynewlong = document.getElementById('newlong').innerHTML;
+         var iframe = document.getElementById('sidebarcontent');       
+         var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+         innerDoc.getElementById('latbox').value = mynewlat;
+         innerDoc.getElementById('longbox').value = mynewlong;
+         innerDoc.getElementById('sourcebox').value = "Google Imagery";
+         
+         $( "#geodiv" ).slideUp( "fast" );
+         myMarker.setMap(null);  
+         alert('Filled new coordinates.');         
+      }
+      
+      
+
+      function getXml(myUrl,id) {
+        infowindow.close();
+        loader('on');
+        $.ajax({
+          type: "GET",
+          url: myUrl,
+          dataType: "xml",
+          success: function(xml) {       
+            window.mysites = parseXml(xml);
+            render(window.mysites);
+            if (id) {
+              //alert('tagged');
+              for (i = 0; i < mysites.length; i++) {
+                if (mysites[i].site_id == id) {
+                  //alert('found');
+                  maphighlight(mysites[i].site_id);
+                }
+              }               
+            }
+          }
+        });
+      }     
+
+      function parseXml(xml) {
+        $(xml).find("site").each(function() {
+          window.mysites.push({
+              site_id: $(this).find("site_id").text(), 
+              site_name: $(this).find("site_name").text(),
+              site_latitude: $(this).find("site_latitude").text(),
+              site_longitude: $(this).find("site_longitude").text(),
+              site_ok: $(this).find("site_ok").text()
+          });
+        });
+      return window.mysites;
+      }   
+     
+
+      function render(mysites) {
+        for (i = 0; i < mysites.length; i++) {
+          if (mysites[i].site_ok == 1){
+              myicon = imagegreen;
+            } else {
+              myicon = imagered;
+            } 
+          window.mysites[i].marker = new google.maps.Marker({
+          position: new google.maps.LatLng(mysites[i].site_latitude, mysites[i].site_longitude),
+          map: map,
+          icon: myicon
+          });
+         
+                 
+          google.maps.event.addListener(mysites[i].marker, 'click', (function(marker, i) {
+            return function() {
+              var mycontent = '<div class="infodiv"><a href="javascript:void(0)" onclick="sidecontent(\'archsite_view.php?archsite_id=' + mysites[i].site_id + '\')">' + mysites[i].site_id + ' - ' + mysites[i].site_name + '</a></div>';
+              infowindow.setContent(mycontent);
+              infowindow.open(map, mysites[i].marker);
+            }        
+          })(marker, i));
+        }  
+      
+        //Kill loading and reveal hidden elements
+        loader('off');
+ 
+      }
+              
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+     
+[end-literal]       
+  </head>
+  <body>
+      <div id="sidebar">
+        <div id="sidetoolbar">
+          <div id="sidetoolbar_home" class="toolbarbutton"><a href="archsites.php" title="Home"><img src="images/home.png"/></a></div>
+          <div id="sidetoolbar_search" class="toolbarbutton"><a href="javascript:void(0)" onclick="sidecontent('archsite_search.php');" title="Search for a Site"><img src="images/search_new.png"/></a></div>
+          <div id="sidetoolbar_search_prev" class="toolbarbutton"><a href="javascript:void(0)" onclick="sidecontent(recentsearch);"  title="Return to Previous Search"><img src="images/search_prev.png"/></a></div>
+          <div id="sidetoolbar_add" class="toolbarbutton" title="Add a New Site"><a href="javascript:void(0)" onclick="sidecontent('archsite_add.php');" title="Add a New Site"><img src="images/add.png"/></a></div>
+          <div id="sidetoolbar_add" class="toolbarbutton"><a href="javascript:void(0)" onclick="updatemap();"  title="Reload Map"><img src="images/reload.png"/></a></div>
+        </div>
+          <div id="sidebarcontentholder">
+            <iframe id="sidebarcontent" src="archsite_search.php" onload='javascript:resizeIframe(this);'></iframe>
+        </div>
+      </div>  
+
+      <div id="geodiv">
+        <div id="geolocator"><p>Move the marker</p><p>and click here &raquo;</p></div>
+        <div id="geobutton"><a href="javascript:void(0)" onclick="populatecoords();" title="Populate Fields"><img src="images/populate.png"/></a></div>
+      </div>
+      <div id="menubutton"><a id="menutoggle" href="javascript:void(0);" onclick="sidebartoggle('change');"><img src="images/menu.png"/></a></div>
+
+      <div id="test"><a href="javascript:void(0)" onclick="alert(map.getZoom());">###</a></div>
+      <div id="map-canvas"></div>
+      <img src="images/loading.gif" id="loading">
+      <div id="myimages"></div>
+  </body>
+</html>

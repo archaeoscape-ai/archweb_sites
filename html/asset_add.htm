@@ -1,0 +1,85 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>RCRC/GAP Databases</title>
+<link rel="stylesheet" href="styles/backend_style.css" type="text/css" />
+<link rel="icon" 
+      type="image/ico" 
+      href="clipboard.ico">
+
+<script language="javascript" type="text/javascript">
+function copytag() {
+	mytext = document.getElementById('mainlabel').value;
+  //alert(mytext);
+  document.getElementById('toplabel').value = mytext;
+}
+</script>
+
+
+</head>
+<body>
+[errors]
+<h2>RCRC/GAP Databases | Add Asset | ID Number [evaluate:(max(asset_id)+1):myassets]</h2>
+<br>
+<table>
+<form action="asset_add.php" method="post" enctype="multipart/form-data">
+[insert required myassets addasset]
+
+[dump-vars]
+  <tr>
+		<td>Label (Exterior)</td>
+		<td>[textarea:asset_label:mainlabel:id="mainlabel"]</td>
+	</tr>
+  <tr>
+		<td>Label (Interior Tag)<a href="javascript:void(0)" onclick="copytag();">(As Above)</a></td>
+		<td>[textarea:asset_tag:toplabel:id="toplabel"]</td>
+	</tr>
+  <tr>
+		<td>Year</td>
+		<td>[textbox:asset_year:year]</td>
+	</tr>
+  <tr>
+		<td>Notes / Description</td>
+		<td>[textarea:asset_notes:description]</td>
+	</tr>    
+  <tr>
+		<td>Samples Removed for Export/Lab/Analytical Work?</td>
+		<td>[checkbox:asset_sampled:sampled:]</td>
+	</tr>     
+  <tr>
+		<td>Information on Samples Removed for Export/Lab/Analytical Work</td>
+		<td>[textarea:asset_sampled_notes:samplinginfo]</td>
+	</tr>   
+  <tr>
+		<td>Packaging</td>
+		<td>[dropdown required:asset_packaging_id:packaging:select packaging_id,packaging_name from packaging ORDER BY packaging_name]<span class="required">&laquo;</span></td>
+	</tr>
+  <tr>
+		<td>Material</td>
+		<td>[dropdown required:asset_material_id:material:select materialtype_id,materialtype_name from materialtypes ORDER BY materialtype_name]<span class="required">&laquo;</span></td>
+	</tr>
+  <tr>
+		<td>Ceramic Type</td>
+		<td>[dropdown :asset_ceramic_id:ceramics:select ceramictype_id,ceramictype_name from ceramictypes ORDER BY ceramictype_name]</td>
+	</tr>
+  <tr>
+		<td>Container ID</td>
+		<td>[dropdown required:asset_container_id:container id:select container_id,container_id from containers ORDER BY container_id]<span class="required">&laquo;</span></td>
+	</tr>       
+  <tr>
+	<td>Image</td>
+		<td>[file  :  upload_file  : File : class="file" id="file"]</td>
+	</tr>
+	<tr>
+		<td>Update</td>
+		<td><input type="submit" value="Submit" class="button"><input type="button" value="Cancel"  onClick="self.location.href='asset_search.php'" class="button"></td>
+	</tr>
+</table>
+[end-insert]
+</form>
+<br />
+
+</body>
+
+</html>

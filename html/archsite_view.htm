@@ -1,0 +1,369 @@
+<html>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link rel="stylesheet" href="styles/sidebarstyle.css" type="text/css" />
+    <script src="scripts/angkorfunctions.js"></script>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <script type="text/javascript" src="scripts/jquery.mousewheel-3.0.6.pack.js"></script>
+
+    <link rel="stylesheet" href="scripts/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="scripts/jquery.fancybox.pack.js?v=2.1.5"></script>
+    
+
+    <link rel="stylesheet" href="scripts/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="scripts/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+    <script type="text/javascript" src="scripts/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+    <link rel="stylesheet" href="scripts/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+    <script type="text/javascript" src="scripts/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
+
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+	        $("tr:odd").addClass("odd");
+		      $(".fancybox").fancybox({type : "image"});      
+      });
+      
+       
+    var projects = [literal][[end-literal]"",[foreach myprojects getproject:1 order by project_id]"[project_name]",[end-foreach][literal]][end-literal];
+    var people = [literal][[end-literal]"",[foreach myindividuals getperson:1 order by individual_id]"[individual_name]",[end-foreach][literal]][end-literal];
+    
+    parent.$( "#geodiv" ).slideUp( "fast" );
+    parent.myMarker.setMap(null);   
+
+    
+    </script>
+
+
+
+</head>
+ [select myarchsites getsite]
+<body onload="createlightbox([archsite_id]);">
+
+[dump-vars]
+<h1 id='heading'>[archsite_id]: [archsite_name_en]</h1>
+[foreach myarchsiteresources getresource: archsiteresource_type=1 order by archsiteresource_sortorder asc limit 1]
+<img id="overviewimage" src="phpthumb/phpThumb.php?src=../myarchsiteresources/[archsiteresource_id]&w=360"/>
+[end-foreach]
+
+<div id="highlightbutton"><a href="javascript:void(0)"  onclick="parent.maphighlight('[archsite_id]')" title="Show on Map"><img src="images/right.png"/></a></div>
+<div id="editbutton"><a href="archsite_edit.php?archsite_id=[archsite_id]"  title="Edit This Site"><img src="images/edit.png"/></a></div>
+<div id="gotophotobutton"><a href="#resourcedivider" title="See Resources"><img src="images/camera.png"/></a></div>
+
+
+
+<table>
+  <tr>
+    <td class="label">English Name</td>
+    <td class="attribute">[archsite_name_en]</td>
+  </tr>
+  <tr>
+    <td class="label">French Name</td>
+    <td class="attribute">[archsite_name_fr]</td>
+  </tr>
+  <tr>
+    <td class="label">Khmer Name</td>
+    <td class="attribute">[archsite_name_kh]</td>
+  </tr>  
+  <tr>
+    <td class="label">Alternative Name(s)</td>
+    <td class="attribute">[archsite_names_alt]</td>
+  </tr>
+  <tr>
+    <td class="label">Alternative Khmer Name(s)</td>
+    <td class="attribute">[archsite_names_kh_alt]</td>
+  </tr>
+  <tr> 
+    <td class="label">Site Type</td>
+    <td class="attribute">[archsitetype_name]</td>
+  </tr>
+  
+  <tr> 
+    <td class="label">Description</td>
+    <td class="attribute">[archsite_description]</td>
+  </tr>
+  <tr>
+    <td class="label" cols>Inventaire Khmere (IK) ID</td>
+    <td class="attribute">[if-eq:archsite_IK_id:"0"][else][archsite_IK_id][end-if-eq]</td>
+  </tr>
+  <tr>
+    <td class="label" cols>IK ID Starred</td>
+    <td class="attribute">[if:archsite_IK_starred:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>  
+    <td class="label">Monuments Historiques (MH) ID</td>
+    <td class="attribute">[if-eq:archsite_MH_id:"0"][else][archsite_MH_id][end-if-eq]</td>
+  </tr>
+  <tr>  
+    <td class="label">Jean Boulbet 1979 (JB) ID</td>
+    <td class="attribute">[if-eq:archsite_JB_id:"0"][else][archsite_JB_id][end-if-eq]</td>
+  </tr>
+  <tr>    
+    <td class="label">MOCFA/EFEO CISARK (CK) ID</td>
+    <td class="attribute">[if-eq:archsite_CK_id:"0"][else]<a href="http://www.site-archeologique-khmer.org/core/showsite.php?id=[archsite_CK_id]" target="_blank">[archsite_CK_id]</a>[end-if-eq]</td>
+  </tr>
+  <tr>          
+    <td class="label">Chistophe Pottier (CP) ID</td>
+    <td class="attribute">[if-eq:archsite_CP_id:"0"][else][archsite_CP_id][end-if-eq]</td>
+  </tr>
+  <tr>    
+    <td class="label">Elizabeth Moore (EM) ID</td>
+    <td class="attribute">[if-eq:archsite_EM_id:"0"][else][archsite_EM_id][end-if-eq]</td>
+  </tr>    
+  <tr>    
+    <td class="label">Boulbet/Dagens (BD) ID</td>
+    <td class="attribute">[if-eq:archsite_BD_id:"0"][else][archsite_BD_id][end-if-eq]</td>
+  </tr>
+  <tr>    
+    <td class="label">George Trouve (GT) ID</td>
+    <td class="attribute">[if-eq:archsite_GT_id:"0"][else][archsite_GT_id][end-if-eq]</td> 
+  <tr>
+  <tr>    
+    <td class="label">ADF Phnom Kulen (PK) ID</td>
+    <td class="attribute">[if-eq:archsite_PK_id:"0"][else][archsite_PK_id][end-if-eq]</td> 
+  <tr>
+  <tr>    
+    <td class="label">Sambor Prei Kuk (IS) ID</td>
+    <td class="attribute">[if-eq:archsite_IS_id:"0"][else][archsite_IS_id][end-if-eq]</td> 
+  <tr> 
+       
+  <tr>
+    <td class="label">Unresolved ID Ambiguity</td>
+    <td class="attribute">[if:archsite_id_ambiguity:1]Yes[else][end-if]</td>
+   </tr>   
+   <tr>
+    <td class="label">Details of ID Ambiguity</td>
+    <td class="attribute">[if-eq:archsite_id_ambiguity_detail:"0"][else][archsite_id_ambiguity_detail][end-if-eq]</td>
+   </tr>   
+   <tr>
+    <td class="label">Latitude</td>
+    <td class="attribute">[archsite_latitude]</td>
+  </tr>
+  <tr>
+    <td class="label">Longitude</td>
+    <td class="attribute">[archsite_longitude]</td>
+   </tr>
+  <tr>
+    <td class="label">Alternative Maps</td>
+    <td class="attribute"><a href="http://www.bing.com/maps/default.aspx?cp=[archsite_latitude]~[archsite_longitude]&lvl=18&style=a" target="_blank" >Bing</a></td>
+   </tr> 
+  <tr>
+    <td class="label">Source of Coordinates</td>
+    <td class="attribute">[if-eq:archsite_coordinate_source:"0"][else][archsite_coordinate_source][end-if-eq]</td>
+   </tr>
+  <tr>
+    <td class="label">In GAP Study Area</td>
+    <td class="attribute">[if:archsite_in_gap_studyarea:1]Yes[else][end-if]</td>
+   </tr>
+  <tr>
+    <td class="label">Ground Verified</td>
+    <td class="attribute">[if:archsite_ground_verified:1]Yes[else][end-if]</td>
+   </tr>
+  <tr>
+    <td class="label">Date & Time Verified</td>
+    <td class="attribute">[archsite_ground_verified_datetime]</td>
+  </tr> 
+  <tr>
+  <td class="label">Ground Verified By</td>
+    <td class="attribute">[if:archsite_ground_verified_by]<script>document.write(projects[literal][[end-literal][archsite_ground_verified_by][literal]][end-literal]);</script>[end-if]</td>
+  </tr>
+  <tr>
+  <td class="label">Initially Located By</td>
+    <td class="attribute">[if:archsite_initially_located_by]<script>document.write(projects[literal][[end-literal][archsite_initially_located_by][literal]][end-literal]);</script>[end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Surface Ceramics</td>
+    <td class="attribute">[if:archsite_ceramics:1]Yes[else][end-if]</td>
+  </tr> 
+  <tr>      
+    <td class="label">Ceramics Details</td>
+    <td class="attribute">[archsite_ceramics_comment]</td>
+  </tr>   
+  <tr>      
+    <td class="label">Build Material: Sandstone</td>
+    <td class="attribute">[if:archsite_material_sandstone:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Build Material: Pink Sandstone</td>
+    <td class="attribute">[if:archsite_material_pink_sandstone:1]Yes[else][end-if]</td>
+  </tr>          
+  <tr>      
+    <td class="label">Build Material: Laterite</td>
+    <td class="attribute">[if:archsite_material_laterite:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Build Material: Brick</td>
+    <td class="attribute">[if:archsite_material_brick:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Build Material: Thma Phnom</td>
+    <td class="attribute">[if:archsite_material_thmaphnom:1]Yes[else][end-if]</td>
+  </tr>    
+  <tr>      
+    <td class="label">Build Material: Other</td>
+    <td class="attribute">[if:archsite_material_other:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Build Material: Comments</td>
+    <td class="attribute">[archsite_material_comment]</td>    
+  </tr>
+  <tr>      
+    <td class="label">Artefacts: Pedestal</td>
+    <td class="attribute">[if:archsite_artefacts_pedestal:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Artefacts: Colonette</td>
+    <td class="attribute">[if:archsite_artefacts_colonette:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Artefacts: Doorframe</td>
+    <td class="attribute">[if:archsite_artefacts_doorframe:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Artefacts: Statuary</td>
+    <td class="attribute">[if:archsite_artefacts_statuary:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Artefacts: Decorated Blocks</td>
+    <td class="attribute">[if:archsite_artefacts_decorated_blocks:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Artefacts: Other</td>
+    <td class="attribute">[if:archsite_artefacts_other:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Artefacts: Comments</td>
+    <td class="attribute">[archsite_artefacts_comment]</td>
+  </tr>  
+  <tr>      
+    <td class="label">Looted</td>
+    <td class="attribute">[if:archsite_looted:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Cultivated</td>
+    <td class="attribute">[if:archsite_cultivated:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Cleared</td>
+    <td class="attribute">[if:archsite_cleared:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Threatened</td>
+    <td class="attribute">[if:archsite_threatened:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>
+    <td class="label">Validated Record (2014 SDG Check)</td>
+    <td class="attribute">[if:archsite_db_resolved:1]Yes[else][end-if]</td>
+   </tr>
+  <tr>
+    <td class="label">To Be Mapped / Remapped (2014 SDG Check)</td>
+    <td class="attribute">[if:archsite_to_be_remapped:1]Yes[else][end-if]</td>
+   </tr>  
+  <tr>
+    <td class="label">New Site To Be Checked (2014 SDG Check)</td>
+    <td class="attribute">[if:archsite_to_be_investigated:1]Yes[else][end-if]</td>
+   </tr>  
+  <tr>
+    <td class="label">To Be Deleted (2014 SDG Check)</td>
+    <td class="attribute">[if:archsite_to_be_removed:1]Yes[else][end-if]</td>
+   </tr>     
+  <tr>
+    <td class="label">Databasing Comments</td>
+    <td class="attribute">[archsite_db_comment]</td>
+   </tr>                 
+   <tr>
+    <td class="label">Record Added</td>
+    <td class="attribute">[archsite_added]</td>
+   </tr>
+   <tr>
+    <td class="label">Record Added By</td>
+    <td class="attribute">[if:archsite_added_by]<script>document.write(people[literal][[end-literal][archsite_added_by][literal]][end-literal]);</script>[end-if]</td>
+   </tr>
+   <tr>
+    <td class="label">Record Modified</td>
+    <td class="attribute">[archsite_modified]</td>
+   </tr>
+   <tr>
+    <td class="label">Record Modified By</td>
+    <td class="attribute">[if:archsite_modified_by]<script>document.write(people[literal][[end-literal][archsite_modified_by][literal]][end-literal]);</script>[end-if]</td>
+   </tr>
+
+                  
+</table>
+
+
+<div id="upbutton"><a href="javascript:void(0)"  title="Return to Top"  onclick="javascript:scrollup();"><img src="images/up.png"/></a></div>
+
+<div id="resourcedivider"></div>
+
+<h1>Linked Resources</h1>
+
+[foreach myarchsiteresources getresource: 1 order by archsiteresource_sortorder asc]
+
+<a href="javascript:void(0)" onclick="javascript:lightbox([archsiteresource_id])"><img class="resourcethumb" src="phpthumb/phpThumb.php?src=../myarchsiteresources/[archsiteresource_id]&w=360"/></a>
+<table>
+  <tr>
+    <td class="label">Resource [literal][[end-literal]<a href="archsiteresource_edit.php?archsiteresource_id=[archsiteresource_id]">Edit</a>[literal]][end-literal]</td>
+    <td class="attribute">[archsiteresource_id]</td>  
+  </tr>
+  <tr>
+    <td class="label">Caption</td>
+    <td class="attribute">[archsiteresource_caption]</td>  
+  </tr>
+  <tr>
+    <td class="label">Resource Type</td>
+    <td class="attribute">[archsiteresource_type_name]</td>  
+  </tr>
+  <tr>
+    <td class="label">Author</td>
+    <td class="attribute">[if:archsiteresource_author]<script>document.write(people[literal][[end-literal][archsiteresource_author][literal]][end-literal]);</script>[end-if]</td>  
+  </tr>
+  <tr>
+    <td class="label">Date</td>
+    <td class="attribute">[archsiteresource_date]</td>  
+  </tr>
+  <td class="label">Project Ownership</td>
+    <td class="attribute">[if:archsiteresource_ownership]<script>document.write(projects[literal][[end-literal][archsiteresource_ownership][literal]][end-literal]);</script>[end-if]</td>
+  </tr>  
+  <tr>
+    <td class="label">Added By</td>
+    <td class="attribute">[if:archsiteresource_added_by]<script>document.write(people[literal][[end-literal][archsiteresource_added_by][literal]][end-literal]);</script>[end-if]</td>  
+  </tr>    
+  <tr>
+    <td class="label">Notes</td>
+    <td class="attribute">[archsiteresource_notes]</td>  
+  </tr>
+  <tr>
+    <td class="label">Depicting [literal][[end-literal]<a href="archsiteresource_additional.php?archsiteresource_id=[archsiteresource_id]">Edit</a>[literal]][end-literal]</td>
+    <td class="attribute">  [foreach myarchsiteresources_lnk_artefacttypes getlinkages]
+
+                                  [select myartefacttypes getartefacttype][artefacttype_name]<br>[end-select]
+
+                            [end-foreach]
+                            [not-found]&nbsp;[end-not-found]
+    </td> 
+  </tr>  
+</table>
+
+<hr class="photodivider">
+
+[end-foreach]
+
+<div id="photosection"></div>
+
+<div id="photoupbutton"><a href="javascript:void(0)"  title="Return to Top"  onclick="javascript:scrollup();"><img src="images/up.png"/></a></div>
+<div id="photobutton"><a href="archsiteresource_add.php?addresource_archsiteresource_archsite_id=[archsite_id]"  title="Add New Resources"><img src="images/camera_add.png"/></a></div>
+
+<div class="footer"></div>
+
+[end-select]
+
+
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>RCRC/GAP Databases</title>
+<link rel="stylesheet" href="styles/backend_style.css" type="text/css" />
+<link rel="stylesheet" href="styles/bluetheme.css" type="text/css"/>
+<link rel="icon" 
+      type="image/ico" 
+      href="clipboard.ico">
+</head>
+<body>
+
+<h2>RCRC/GAP Databases | Search for Asset</h2>
+<p><a href="./.">Home</a> | <a href="asset_add.php">Add New Asset</a> | <a href="container_search.php">Go to Containers</a></p>
+
+
+<!-- Search form -->
+<form action="asset_search.php">
+[search myassets assetsearch]
+<table>
+  <tr>
+		<td>Asset ID</td>
+		<td>[textbox:asset_id:componentid]</td>
+	</tr>
+  <tr>
+		<td>Label (Exterior)</td>
+		<td>[textbox:asset_label:mainlabel]</td>
+	</tr>
+  <tr>
+		<td>Label (Interior Tag)</td>
+		<td>[textbox:asset_tag:toplabel]</td>
+	</tr>
+  <tr>
+		<td>Year</td>
+		<td>[textbox:asset_year:year]</td>
+	</tr>
+  <tr>
+		<td>Notes / Description</td>
+		<td>[textbox:asset_notes:description]</td>
+	</tr>    
+  <tr>
+		<td>Samples Removed for Export/Lab/Analytical Work?</td>
+		<td>[checkbox:asset_sampled:sampled:]</td>
+	</tr>     
+  <tr>
+		<td>Information on Samples Removed for Export/Lab/Analytical Work</td>
+		<td>[textbox:asset_sampled_notes:samplinginfo]</td>
+	</tr>   
+  <tr>
+		<td>Packaging</td>
+		<td>[dropdown required:asset_packaging_id:packaging:select packaging_id,packaging_name from packaging ORDER BY packaging_name]</td>
+	</tr>
+  <tr>
+		<td>Material</td>
+		<td>[dropdown required:asset_material_id:material:select materialtype_id,materialtype_name from materialtypes ORDER BY materialtype_name]</td>
+	</tr>
+  <tr>
+		<td>Ceramic Type</td>
+		<td>[dropdown :asset_ceramic_id:ceramic:select ceramictype_id,ceramictype_name from ceramictypes ORDER BY ceramictype_name]</td>
+	</tr>
+  <tr>
+		<td>Container ID</td>
+		<td>[dropdown required:asset_container_id:container:select container_id,container_id from containers ORDER BY container_id]</td>
+	</tr>       
+	<tr>
+		<td></td>
+		<td><input type="submit" value="Search" class="button"><input type="button" value="Reset"  onClick="self.location.href='asset_search.php'" class="button"></td>
+	</tr>
+</table>
+</form>
+<!-- End Search form -->
+
+[if-eq:assetsearch-searched:"1"]
+
+  [if:result-count]
+   <h3>There are [result-count] matching records. Showing results [result-first] to [result-last].</h3>
+   [else]<h3>No records match those criteria</h3>
+  [end-if]
+
+  [if:prev-url]<a class="searchnav" href="[prev-url]">&laquo; Previous Page</a>[end-if]
+  [if:next-url][if:prev-url]  |  [end-if]<a class="searchnav" href="[next-url]">Next Page &raquo;</a>[end-if]
+
+
+<table id="myTable" class="tablesorter">
+ <thead>
+  <tr class="title">
+    <th>ID #&nbsp;&nbsp;&nbsp;</th>
+    <th>Label (Exterior)</th>
+    <th>Label (Interior/Tag)</th>
+    <th>Year</th>
+    <th>Notes</th>
+    <th>Sampled?</th>
+    <th>Packaging</th>
+    <th>Material</th>
+    <th>Ceramic Type</th>
+    <th>Container ID</th>
+    <th>Photo</th>   
+  </tr>
+ </thead>
+ <tbody> 
+[foreach myassets getcomponent: 1 order by asset_id asc]
+  <tr>
+    <td><a class="recordtitle" href="asset_view.php?asset_id=[asset_id]">[asset_id]<br><br><img src="images/link.png"/></a></td>
+    <td><div>[asset_label]</div></td>
+    <td><div>[asset_tag]</div></td>
+    <td>[asset_year]</td>
+    <td><div>[asset_notes]</div></td>
+    <td>[if:asset_sampled:1]Yes[else]No[end-if]</td>
+    <td>[packaging_name]</td>
+    <td>[materialtype_name]</td>
+    <td>[ceramictype_name]</td>
+    <td><a href="container_view.php?container_id=[container_id]">[container_id]</a></td>
+    <td>[if:asset_photo_name]<a href="phpthumb/phpThumb.php?src=../myassets/[asset_id]" target="_blank"><image src="phpthumb/phpThumb.php?src=../myassets/[asset_id]&w=100"></a>[else]Photo Missing[end-if]</td>
+  </tr>
+[end-foreach]
+  </tbody>
+</table>
+
+  [if:result-count]
+   <h3>There are [result-count] matching records. Showing results [result-first] to [result-last].</h3>
+   [else]<h3>No records match those criteria</h3>
+  [end-if]
+
+  [if:prev-url]<a class="searchnav" href="[prev-url]">&laquo; Previous Page</a>[end-if]
+  [if:next-url][if:prev-url]  |  [end-if]<a class="searchnav" href="[next-url]">Next Page &raquo;</a>[end-if]
+  <br><br>
+
+[end-if-eq]
+  
+[end-search]
+
+
+
+
+</body>  
+</html>

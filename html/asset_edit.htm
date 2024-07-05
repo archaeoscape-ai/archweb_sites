@@ -1,0 +1,81 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>RCRC/GAP Databases</title>
+<link rel="stylesheet" href="styles/backend_style.css" type="text/css" />
+<link rel="icon" 
+      type="image/ico" 
+      href="clipboard.ico">
+</head>
+<body>
+[errors]
+<h2>RCRC/GAP Databases | Edit Asset #[foreach myassets getheading][asset_id][end-foreach]</h2>
+<br>
+
+
+
+<table>
+<form action="asset_edit.php" method="post" enctype="multipart/form-data">
+[update required myassets updateasset]
+<a href="asset_search.php" class="searchnav">Back to Asset Search</a>[if:updateasset-submitted]  |  <a href="container_view.php?container_id=[asset_container_id]" class="searchnav">Go Back to the Container (#[asset_container_id])</a>  |  <a href="asset_edit.php?asset_id=[evaluate:asset_id+1:myassets]" class="searchnav">Edit the Next Asset (#[evaluate:asset_id+1:myassets])</a>[end-if]
+<br><br>
+[dump-vars]
+  <tr>
+		<td>Label (Exterior)</td>
+		<td>[textarea:asset_label:mainlabel]</td>
+	</tr>
+  <tr>
+		<td>Label (Interior Tag)</td>
+		<td>[textarea:asset_tag:toplabel]</td>
+	</tr>
+  <tr>
+		<td>Year</td>
+		<td>[textbox:asset_year:year]</td>
+	</tr>
+  <tr>
+		<td>Notes / Description</td>
+		<td>[textarea:asset_notes:description]</td>
+	</tr>    
+  <tr>
+		<td>Samples Removed for Export/Lab/Analytical Work?</td>
+		<td>[checkbox:asset_sampled:sampled:]</td>
+	</tr>     
+  <tr>
+		<td>Information on Samples Removed for Export/Lab/Analytical Work</td>
+		<td>[textarea:asset_sampled_notes:samplinginfo]</td>
+	</tr>   
+  <tr>
+		<td>Packaging</td>
+		<td>[dropdown required:asset_packaging_id:packaging:select packaging_id,packaging_name from packaging ORDER BY packaging_name]<span class="required">&laquo;</span></td>
+	</tr>
+  <tr>
+		<td>Material</td>
+		<td>[dropdown required:asset_material_id:material:select material_id,material_name from materials ORDER BY material_name]<span class="required">&laquo;</span></td>
+	</tr>
+  <tr>
+		<td>Ceramic Type</td>
+		<td>[dropdown :asset_ceramic_id:ceramics:select ceramic_id,ceramic_name from ceramics ORDER BY ceramic_name]</td>
+	</tr>
+  <tr>
+		<td>Container ID</td>
+		<td>[dropdown required:asset_container_id:container id:select container_id,container_id from containers ORDER BY container_id]<span class="required">&laquo;</span></td>
+	</tr>            
+  <tr>
+	<td>Image</td>
+		<td>[file  :  upload_file  : File : class="file" id="file"][if:asset_photo_name]<span class="tips">If you don't choose a new file, the system will use the photo that's already on file for this record (see below).</span>[else]<span class="tips">There is no photo on file for this record yet.</span>[end-if]</td>
+	</tr>
+	<tr>
+		<td>Update</td>
+		<td><input type="submit" value="Submit" class="button"><input type="button" value="Cancel"  onClick="self.location.href='asset_search.php'" class="button"></td>
+	</tr>
+</table>
+[end-update]
+</form>
+<br />
+
+[foreach myassets getphoto][if:asset_photo_name]<a href="phpthumb/phpThumb.php?src=../myassets/[asset_id]" target="_blank"><image src="phpthumb/phpThumb.php?src=../myassets/[asset_id]&w=400"></a>[end-if][end-foreach]
+
+</body>
+
+</html>

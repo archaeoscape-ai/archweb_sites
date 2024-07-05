@@ -1,0 +1,162 @@
+<html>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link rel="stylesheet" href="styles/sidebarstyle.css" type="text/css" />
+    <script src="scripts/angkorfunctions.js"></script>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <script type="text/javascript" src="scripts/jquery.mousewheel-3.0.6.pack.js"></script>
+
+    <link rel="stylesheet" href="scripts/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="scripts/jquery.fancybox.pack.js?v=2.1.5"></script>
+    
+
+    <link rel="stylesheet" href="scripts/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="scripts/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+    <script type="text/javascript" src="scripts/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+    <link rel="stylesheet" href="scripts/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+    <script type="text/javascript" src="scripts/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
+
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+	        $("tr:odd").addClass("odd");
+		      $(".fancybox").fancybox({type : "image"});      
+      });
+      
+       
+    var projects = [literal][[end-literal]"",[foreach myprojects getproject:1 order by project_id]"[project_name]",[end-foreach][literal]][end-literal];
+    var people = [literal][[end-literal]"",[foreach myindividuals getperson:1 order by individual_id]"[individual_name]",[end-foreach][literal]][end-literal];
+    
+    parent.$( "#geodiv" ).slideUp( "fast" );
+    parent.myMarker.setMap(null);   
+
+    
+    </script>
+
+
+
+</head>
+ [select myworksites getsite]
+
+<body onload="createlightbox([worksite_id]);">
+
+[dump-vars]
+<h2 id='heading'>Worksite #[worksite_id]: [worksite_name]</h2>
+
+<h3><a href="worksiteresource_searchonload.php?resourcesearch_worksiteresource_worksite_id=[worksite_id]&resourcesearch_worksiteresource_type=16" target="_blank">Preliminary Report</a></h3>
+
+<h3><a href="worksiteresource_searchonload.php?resourcesearch_worksiteresource_worksite_id=[worksite_id]&resourcesearch_worksiteresource_type=1	" target="_blank">Site Overview</a></h3>
+
+<h3><a href="worksiteresource_searchonload.php?resourcesearch_worksiteresource_worksite_id=[worksite_id]&resourcesearch_worksiteresource_type=17" target="_blank">Publications</a></h3>
+
+<h3><a href="worksiteresource_search.php?resourcesearch_worksiteresource_worksite_id=[worksite_id]" target="_blank">Search All Linked Resources</a></h3>
+
+<h3><a href="artefact_searchonload.php?artefactsearch_artefact_worksite_id=[worksite_id]" target="_blank">See Imported Ceramics - Surface Collection</h3>
+
+<div id="highlightbutton"><a href="javascript:void(0)"  onclick="parent.maphighlight('[worksite_id]')" title="Show on Map"><img src="images/right.png"/></a></div>
+<div id="editbutton"><a href="worksite_edit.php?worksite_id=[worksite_id]"  title="Edit This Site"><img src="images/edit.png"/></a></div>
+<div id="gotophotobutton"><a href="#resourcedivider" title="See Resources"><img src="images/camera.png"/></a></div>
+
+
+
+<table>
+  <tr>
+    <td class="label">Name</td>
+    <td class="attribute">[worksite_name]</td>
+  </tr>
+  <tr>
+    <td class="label" cols>Site Code</td>
+    <td class="attribute">[worksite_code]</td>
+  </tr> 
+  <tr> 
+    <td class="label">Site Type</td>
+    <td class="attribute">[worksitetype_name]</td>
+ </tr>
+  <tr> 
+    <td class="label">Work Method</td>
+    <td class="attribute">[worksitemethod_name]</td>
+  </tr>
+   <tr>
+    <td class="label" cols>Archsite ID</td>
+    <td class="attribute"><a href="archsites.php?getsite_archsite_id=[worksite_archsite_id]" target="_blank">[worksite_archsite_id]</a></td>
+  </tr>
+   <tr>
+    <td class="label" cols>GCS ID</td>
+    <td class="attribute">[worksite_GCS_id]</td>
+  </tr>   
+   <tr>
+    <td class="label">Latitude</td>
+    <td class="attribute">[worksite_latitude]</td>
+  </tr>
+  <tr>
+    <td class="label">Longitude</td>
+    <td class="attribute">[worksite_longitude]</td>
+   </tr> 
+     <tr>
+    <td class="label">Alternative Maps</td>
+    <td class="attribute"><a href="http://www.bing.com/maps/default.aspx?cp=[worksite_latitude]~[worksite_longitude]&lvl=18&style=a" target="_blank" >Bing</a></td>
+   </tr>  
+  <tr>      
+    <td class="label">Looted</td>
+    <td class="attribute">[if:worksite_looted:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Cultivated</td>
+    <td class="attribute">[if:worksite_cultivated:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Cleared</td>
+    <td class="attribute">[if:worksite_cleared:1]Yes[else][end-if]</td>
+  </tr>
+  <tr>      
+    <td class="label">Threatened</td>
+    <td class="attribute">[if:worksite_threatened:1]Yes[else][end-if]</td>
+  </tr>
+   <tr>
+    <td class="label">Record Added</td>
+    <td class="attribute">[worksite_added]</td>
+   </tr>
+   <tr>
+    <td class="label">Record Added By</td>
+    <td class="attribute">[if:worksite_added_by]<script>document.write(people[literal][[end-literal][worksite_added_by][literal]][end-literal]);</script>[end-if]</td>
+   </tr>
+   <tr>
+    <td class="label">Record Modified</td>
+    <td class="attribute">[worksite_modified]</td>
+   </tr>
+   <tr>
+    <td class="label">Record Modified By</td>
+    <td class="attribute">[if:worksite_modified_by]<script>document.write(people[literal][[end-literal][worksite_modified_by][literal]][end-literal]);</script>[end-if]</td>
+   </tr>
+
+                  
+</table>
+
+
+
+<div id="upbutton"><a href="javascript:void(0)"  title="Return to Top"  onclick="javascript:scrollup();"><img src="images/up.png"/></a></div>
+
+<div id="resourcedivider"></div>
+
+
+
+
+<div id="photosection"></div>
+
+<div id="photoupbutton"><a href="javascript:void(0)"  title="Return to Top"  onclick="javascript:scrollup();"><img src="images/up.png"/></a></div>
+<div id="photobutton"><a href="worksiteresource_add.php?addresource_worksiteresource_worksite_id=[worksite_id]"  title="Add New Resources"><img src="images/camera_add.png"/></a></div>
+
+<div class="footer"></div>
+
+[end-select]
+
+
+</body>
+
+</html>

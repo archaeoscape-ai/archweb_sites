@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles/sidebarstyle.css" type="text/css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+    <script src="scripts/angkorfunctions.js"></script>
+
+    <script>
+      $(document).ready(function(){
+	       $("tr:odd").addClass("odd");
+      });
+      
+      
+    var selected = [literal][[end-literal][select myworksiteresources resource][foreach myworksiteresources_lnk_artefacttypes getartefacttypes][select myartefacttypes getartefacttype]"[artefacttype_id]",[end-select][end-foreach][end-select][literal]][end-literal];
+    
+      
+    </script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+</head>
+
+<body onload="highlightselected()">
+
+[/*select myworksiteresources resource]
+
+ [dump-vars]
+ 
+  [foreach myworksiteresources_lnk_artefacttypes getartefacttypes]
+  [not-found]&nbsp;[end-not-found]
+  
+      [select myartefacttypes getartefacttype][artefacttype_id][end-select]
+      [not-found]&nbsp;[end-not-found]
+      
+  [end-foreach]
+
+[end-select*/]
+
+
+[select myworksiteresources resourceid]
+<h1>Photo Metadata for New Resource at [select myworksites getworksite]Site [worksite_id] ([worksite_name][end-select])...?</h1>
+<br/><br/>
+<img class="resourcethumb" src="phpthumb/phpThumb.php?src=../myworksiteresources/[worksiteresource_id]&w=365"/>
+[errors]
+[dump-vars]
+<table>
+  <tr>
+    <td class="label">Caption</td>
+    <td class="attribute">[worksiteresource_caption]</td>
+  </tr>              
+</table>
+<br><br>
+[end-select]
+
+<iframe src="worksiteresource_contentadd.php" id="linkageframe"></iframe> 
+
+
+[select myworksiteresources resourcemodify]
+  
+      [foreach myartefacttypes getartefacttypes: 1 order by artefacttype_name asc]
+                        [dump-vars]                   
+                        <input type="button" class="typebutton" id="[artefacttype_id]" value="[artefacttype_name]" onclick="linkstuff([worksiteresource_id],[artefacttype_id])">
+            
+      [end-foreach]
+
+
+
+<input type="button" value="Finished" class="button" onclick="javascript:window.location.href='worksite_view.php?worksite_id=[worksiteresource_worksite_id]';">
+
+<input type="button" value="+ Photos" class="button" onclick="javascript:window.location.href='worksiteresource_add.php?addresource_worksiteresource_worksite_id=[worksiteresource_worksite_id]';">
+
+[end-select]
+
+<div id="photoupbutton"><a href="javascript:void(0)"  title="Return to Top"  onclick="javascript:scrollup();"><img src="images/up.png"/></a></div>
+
+
+</body>
+
+</html>

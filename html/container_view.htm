@@ -1,0 +1,110 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>RCRC/GAP Databases</title>
+<link rel="stylesheet" href="styles/backend_style.css" type="text/css" />
+<link rel="icon" 
+      type="image/ico" 
+      href="clipboard.ico">
+</head>
+<body>
+<h2>RCRC/GAP Databases | View Container #[foreach mycontainers getcontainer][container_id]</h2>
+<p><a href="container_search.php">Home</a> | <a href="container_add.php">Add a New Container</a> | <a href="container_edit.php?container_id=[container_id]">Edit This Container</a> | <a href="worksites.php">Manage Work Site List</a> | <a href="container_byphoto.php">Browse Containers by Photo</a></p>
+<table>
+  <tr>
+		<td>Label (Main/Front)</td>
+		<td>[container_label_front]</td>
+	</tr>
+  <tr>
+		<td>Label (Text/Lid)</td>
+		<td>[container_label_lid]</td>
+	</tr>
+	<tr>
+		<td>Container Type</td>
+		<td>[containertype_name]</td>
+	</tr>
+  <tr>
+		<td>Size</td>
+		<td>[size_name]</td>
+	</tr>
+    <tr>
+	<td>Contents</td>
+		<td>[contenttype_name]</td>
+	</tr>
+  <tr>
+		<td>Location</td>
+		<td>[location_name]</td>
+	</tr>
+  <tr>
+		<td>Work Site</td>
+		<td>[worksite_name]</td>
+	</tr>
+  <tr>
+		<td>Project</td>
+		<td>[project_name]</td>
+	</tr>  
+  <tr>
+		<td>Notes / Description</td>
+		<td>[container_description]</td>
+	</tr>  
+  <tr>
+		<td>Deaccsessioned?</td>
+		<td>[if:container_deaccessioned:1]Already[else]Not Yet[end-if]</td>
+	</tr>   
+  <tr>
+		<td>Deaccession Information</td>
+		<td>[container_deaccession_notes]</td>
+	</tr>      
+  <tr>
+</table>
+
+<br />
+[if:container_photo_name]<h3>Photo of Container</h3><a href="phpthumb/phpThumb.php?src=../mycontainers/[container_id]" target="_blank"><image src="phpthumb/phpThumb.php?src=../mycontainers/[container_id]&w=400"></a>[end-if]
+
+<h3>Assets Inside This Container</h3>
+<p><a href="asset_add.php?addasset_asset_container_id=[container_id]">Add A New Asset in This Container</a> | <a href="asset_bulk_add.php?addasset_asset_container_id=[container_id]&addasset_asset_material_id=1&addasset_asset_packaging_id=1">Bulk Add New Assets in This Container (Bagged Ceramics)</a></p>
+
+
+
+<table id="myTable" class="tablesorter">
+ <thead>
+  <tr class="title">
+    <th>ID #&nbsp;&nbsp;&nbsp;</th>
+    <th>Label (Exterior)</th>
+    <th>Label (Interior/Tag)</th>
+    <th>Year</th>
+    <th>Notes</th>
+    <th>Sampled?</th>
+    <th>Packaging</th>
+    <th>Material</th>
+    <th>Ceramic Type</th>
+    <th>Container ID</th>
+    <th>Photo</th>   
+  </tr>
+ </thead>
+ <tbody> 
+[foreach myassets getcomponent: 1 order by asset_id asc]
+  <tr>
+    <td class="recordtitle"><a class="recordtitle" href="asset_view.php?asset_id=[asset_id]">[asset_id]<br><br><img src="images/link.png"/></a></td>
+    <td><div>[asset_label]</div></td>
+    <td><div>[asset_tag]</div></td>
+    <td>[asset_year]</td>
+    <td><div>[asset_notes]</div></td>
+    <td>[if:asset_sampled:1]Yes[else]No[end-if]</td>
+    <td>[packaging_name]</td>
+    <td>[materialtype_name]</td>
+    <td>[ceramictype_name]</td>
+    <td>[container_id]</td>
+    <td>[if:asset_photo_name]<a href="phpthumb/phpThumb.php?src=../myassets/[asset_id]" target="_blank"><image src="phpthumb/phpThumb.php?src=../myassets/[asset_id]&w=200"></a>[else]Photo Missing[end-if]</td>
+  </tr>
+[end-foreach]
+</table>
+
+
+
+
+[end-foreach]
+</body>
+
+</html>

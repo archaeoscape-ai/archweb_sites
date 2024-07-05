@@ -1,0 +1,268 @@
+<?php
+
+
+/* General Environment Variables */
+
+define('DATABASE', 'coredata');
+
+define('READUSER', 'coreaccess');
+define('READPASS', 'Safari_1');
+define('WRITEUSER', 'coreaccess');
+define('WRITEPASS', 'Safari_1');
+
+define('UPLOAD_PATH', '.');
+
+define('MIMETYPE_TABLE', 'mimetypes');
+define('MIMETYPE_EXTENSION_FIELD', 'mt_extension');
+define('MIMETYPE_TYPE_FIELD', 'mt_type');
+
+
+
+/* Mapping Stuff is Here */
+
+$MAINTABLES['myarchsites'] = 'archsites';
+	$PKEY['myarchsites'] = 'archsite_id';
+  $INIDATE_FIELD['myarchsites'] = 'archsite_added';
+  $MODDATE_FIELD['myarchsites'] = 'archsite_modified';
+  $LOOKUPS['myarchsites'] =
+		array ('archsitetypes' => 'archsite_archsitetype=archsitetype_id',
+		       'projects' => 'archsite_ground_verified_by=project_id',
+           'projects' => 'archsite_initially_located_by=project_id',
+           'individuals' => 'archsite_added_by=individual_id',
+           'individuals' => 'archsite_modified_by=individual_id');           
+
+$MAINTABLES['myarchsiteresources'] = 'archsiteresources';
+	$PKEY['myarchsiteresources'] = 'archsiteresource_id';
+  $INIDATE_FIELD['myarchsiteresources'] = 'archsiteresource_added';
+	$DELETED_FIELD["myarchsiteresources"] = 'archsiteresource_deleted';
+
+
+$FILES['myarchsiteresources'] = array (
+	'name' => 'archsiteresource_file_name',
+	'path' => 'archsiteresource_file_path',
+    'size' => 'archsiteresource_file_size',
+	'type' => 'archsiteresource_file_mimetype');
+
+
+
+
+$LINK_KEYS['myarchsiteresources'] = 
+    array ('myarchsites-ID' => 'archsiteresource_archsite_id');
+
+
+$JOINS['myarchsiteresources'] = 
+    array ('myarchsites-ID' => 'archsiteresource_archsite_id');
+
+
+$LOOKUPS['myarchsiteresources'] =  
+		array ('individuals' => 'archsiteresource_author=individual_id',
+                  'projects' => 'archsiteresource_ownership=project_id',
+    'archsiteresource_types' => 'archsiteresource_type=archsiteresource_type_id');   
+
+$MAINTABLES['myartefacttypes'] = 'artefacttypes';
+      $PKEY['myartefacttypes'] = 'artefacttype_id';
+
+$MAINTABLES['myarchsiteresources_lnk_artefacttypes'] = 'archsiteresources_lnk_artefacttypes';
+      $PKEY['myarchsiteresources_lnk_artefacttypes'] = 'archsiteresources_lnk_artefacttype_id';
+  $DELETED_FIELD['myarchsiteresources_lnk_artefacttypes'] = 'archsiteresources_lnk_deleted';
+
+
+
+$LINK_KEYS['myarchsiteresources_lnk_artefacttypes'] = array('myarchsiteresources-ID' =>
+	'archsiteresources_lnk_artefacttypes_archsiteresource_id','myartefacttypes-ID' => 'archsiteresources_lnk_artefacttypes_artefacttype_id');
+
+
+$LOOKUPS['myarchsiteresources_lnk_artefacttypes'] = 
+      array ('artefacttypes' => 'archsiteresources_lnk_artefacttypes_artefacttype_id=artefacttype_id');
+
+$JOINS['myarchsiteresources_lnk_artefacttypes'] = 
+    array ('myartefacttypes-ID' => 'archsiteresources_lnk_artefacttypes_artefacttype_id');  
+
+
+/* Experiment */
+
+$MAINTABLES['mycars'] = 'cars';
+	$PKEY['mycars'] = 'car_id';
+
+$MAINTABLES['mycountries'] = 'countries';
+	$PKEY['mycountries'] = 'country_id';
+
+$MAINTABLES['mylinks'] = 'links';
+	$PKEY['mylinks'] = 'link_id';
+
+$LINK_KEYS['mylinks'] = array('mycars-ID' =>
+	'link_car_id','mycountries-ID' => 'link_country_id');
+
+
+/* Non Mapping Stuff Below */
+
+   $MAINTABLES['mycontainers'] = 'containers';
+     	 $PKEY['mycontainers'] = 'container_id';
+$INIDATE_FIELD['mycontainers'] = 'container_added';
+$MODDATE_FIELD['mycontainers'] = 'container_modified';
+  $LOOKUPS['mycontainers'] =
+	array ('containertypes' => 'container_containertype=containertype_id',
+		        'locations' => 'container_location=location_id',
+                 'projects' => 'container_project=project_id',
+                'worksites' => 'container_worksite=worksite_id',
+                    'sizes' => 'container_size=size_id',
+             'contenttypes' => 'container_contenttype=contenttype_id');
+
+$FILES['mycontainers'] = 
+array ('name' => 'container_photo_name',
+	   'path' => 'container_photo_path',
+       'size' => 'container_photo_size',
+	   'type' => 'container_photo_mimetype');
+
+
+   $MAINTABLES['myassets'] = 'assets';
+    	 $PKEY['myassets'] = 'asset_id';
+$INIDATE_FIELD['myassets'] = 'asset_added';
+$MODDATE_FIELD['myassets'] = 'asset_modified';
+      $LOOKUPS['myassets'] =
+		array ('packaging' => 'asset_packaging_id=packaging_id',
+		   'materialtypes' => 'asset_material_id=materialtype_id',
+            'ceramictypes' => 'asset_ceramic_id=ceramictype_id',
+              'containers' => 'asset_container_id=container_id');
+
+$FILES['myassets'] = 
+array ('name' => 'asset_photo_name',
+	   'path' => 'asset_photo_path',
+       'size' => 'asset_photo_size',
+	   'type' => 'asset_photo_mimetype');
+
+
+$MAINTABLES['myworksites'] = 'worksites';
+      $PKEY['myworksites'] = 'worksite_id';
+
+
+
+/* Worksites Map and Resources */
+
+$MAINTABLES['myworksites'] = 'worksites';
+	  $PKEY['myworksites'] = 'worksite_id';
+  $INIDATE_FIELD['myworksites'] = 'worksite_added';
+  $MODDATE_FIELD['myworksites'] = 'worksite_modified';
+       $LOOKUPS['myworksites'] =
+		array ('worksitetypes' => 'worksite_sitetype=worksitetype_id',
+             'worksitemethods' => 'worksite_method=worksitemethod_id',
+	             'individuals' => 'worksite_added_by=individual_id',
+                 'individuals' => 'worksite_modified_by=individual_id');           
+
+$MAINTABLES['myworksiteresources'] = 'worksiteresources';
+	  $PKEY['myworksiteresources'] = 'worksiteresource_id';
+  $INIDATE_FIELD['myworksiteresources'] = 'worksiteresource_added';
+  $DELETED_FIELD["myworksiteresources"] = 'worksiteresource_deleted';
+
+
+$FILES['myworksiteresources'] = array (
+	'name' => 'worksiteresource_file_name',
+	'path' => 'worksiteresource_file_path',
+    'size' => 'worksiteresource_file_size',
+	'type' => 'worksiteresource_file_mimetype');
+
+$LINK_KEYS['myworksiteresources'] = 
+    array ('myworksites-ID' => 'worksiteresource_worksite_id');
+
+$JOINS['myworksiteresources'] = 
+    array ('myworksites-ID' => 'worksiteresource_worksite_id');
+
+$LOOKUPS['myworksiteresources'] =  
+		array ('projects' => 'worksiteresource_project=project_id',
+ 'worksiteresource_types' => 'worksiteresource_type=worksiteresource_type_id',
+               'trenches' => 'worksiteresource_trench=trench_id',
+	       'fieldseasons' => 'worksiteresource_fieldseason=fieldseason_id',   
+              'worksites' => 'worksiteresource_worksite_id=worksite_id');
+			  
+$MAINTABLES['myartefacttypes'] = 'artefacttypes';
+      $PKEY['myartefacttypes'] = 'artefacttype_id';
+
+
+
+$MAINTABLES['myworksiteresourcetypes'] = 'worksiteresource_types';
+      $PKEY['myworksiteresourcetypes'] = 'worksiteresource_type_id';
+      
+$MAINTABLES['myfieldseasons'] = 'fieldseasons';
+      $PKEY['myfieldseasons'] = 'fieldseason_id';      
+
+$MAINTABLES['mytrenches'] = 'trenches';
+      $PKEY['mytrenches'] = 'trench_id';
+
+$MAINTABLES['myindividuals'] = 'individuals';
+	$PKEY['myindividuals'] = 'individual_id';
+
+
+$MAINTABLES['myprojects'] = 'projects';
+	$PKEY['myprojects'] = 'project_id';
+
+
+$LINK_KEYS['myassets'] =
+	array('mycontainers-ID' => 'asset_container_id');
+  
+  
+        
+  
+/* Tradeware Ceramics Stuff */
+
+$MAINTABLES['myartefacts'] = 'artefacts';
+  $PKEY['myartefacts'] = 'artefact_id';
+  $INIDATE_FIELD['myartefacts'] = 'artefact_added';
+  $MODDATE_FIELD['myartefacts'] = 'artefact_modified';
+  $LOOKUPS['myartefacts'] = 
+  array( 'projects' => 'artefact_project_id=project_id',
+    'materialtypes' => 'artefact_material_id=materialtype_id',
+        'worksites' => 'artefact_worksite_id=worksite_id',
+     'ceramictypes' => 'artefact_ceramic_id=ceramictype_id',
+            'assets'=> 'artefact_asset_id=asset_id',
+    'vesselportions'=> 'artefact_portion_id=vesselportion_id',    
+       'vesselforms'=> 'artefact_form_id=vesselform_id',
+      'pastecolours'=> 'artefact_paste_id=pastecolour_id',
+     'pastetextures'=> 'artefact_texture_id=pastetexture_id',
+     'intglazetypes'=> 'artefact_int_glaze_id=intglazetype_id',
+     'extglazetypes'=> 'artefact_ext_glaze_id=extglazetype_id',
+           'regions'=> 'artefact_region_id=region_id');
+
+$MAINTABLES['mymaterials'] = 'materialtypes';
+  $PKEY['mymaterials'] = 'materialtype_id';
+
+$MAINTABLES['mytypes'] = 'types';
+  $PKEY['mytypes'] = 'type_id';
+
+$MAINTABLES['myceramics'] = 'ceramics';
+  $PKEY['myceramics'] = 'ceramic_id';
+
+$MAINTABLES['myportions'] = 'vesselportions';
+  $PKEY['myportions'] = 'vesselportion_id';
+
+$MAINTABLES['myforms'] = 'vesselforms';
+  $PKEY['myforms'] = 'vesselform_id';
+
+$MAINTABLES['mypastes'] = 'pastecolours';
+  $PKEY['mypastes'] = 'pastecolour_id';
+
+$MAINTABLES['mytextures'] = 'pastetextures';
+  $PKEY['mytextures'] = 'pastetexture_id';
+
+$MAINTABLES['myintglazes'] = 'intglazetypes';
+  $PKEY['myintglazes'] = 'intglazetype_id';
+
+$MAINTABLES['myextglazes'] = 'extglazetypes';
+  $PKEY['myextglazes'] = 'extglazetype_id';
+
+$MAINTABLES['myregions'] = 'regions';
+  $PKEY['myregions'] = 'region_id';
+  
+       
+
+
+/* Custom Search-Related Stuff is Below */
+                                         
+define('ajaxsearch-RESULTS_PER_PAGE', 1000);
+
+define('mainsearch-RESULTS_PER_PAGE', 50);
+
+define('assetsearch-RESULTS_PER_PAGE', 50);
+
+
+?>
+                

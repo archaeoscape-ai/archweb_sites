@@ -1,0 +1,73 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>RCRC Asset Tracker</title>
+<link rel="stylesheet" href="styles/backend_style.css" type="text/css" />
+<link rel="icon" 
+      type="image/ico" 
+      href="clipboard.ico">
+</head>
+<body>
+[errors]
+<h2>RCRC Asset Tracker | Add Asset</h2>
+<br>
+<table>
+<form action="asset_add.php" method="post" enctype="multipart/form-data">
+[insert myassets addasset]
+  <tr>
+		<td>Label (Main/Front)</td>
+		<td>[textarea:asset_label_front:mainlabel]</td>
+	</tr>
+  <tr>
+		<td>Label (Text/Lid)</td>
+		<td>[textarea:asset_label_lid:toplabel]</td>
+	</tr>
+	<tr>
+		<td>Container</td>
+		<td>[dropdown required:asset_container:container:select container_id,container_name from containers ORDER BY container_name]<span class="required">&laquo;</span></td>
+	</tr>
+  <tr>
+		<td>Size</td>
+		<td>[dropdown required:asset_size:size:select size_id,size_name from sizes ORDER BY size_name]<span class="required">&laquo;</span></td>
+	</tr>
+  <tr>
+		<td>Location</td>
+		<td>[dropdown required:asset_location:location:select location_id,location_name from locations ORDER BY location_name]<span class="required">&laquo;</span></td>
+	</tr>
+  <tr>
+		<td>Site</td>
+		<td>[dropdown required:asset_site:site:select site_id,site_name from sites ORDER BY site_name]<span class="required">&laquo;</span></td>
+	</tr>
+  <tr>
+		<td>Project</td>
+		<td>[dropdown required:asset_project:project:select project_id,project_name from projects ORDER BY project_name]<span class="required">&laquo;</span></td>
+	</tr>  
+  <tr>
+		<td>Notes / Description</td>
+		<td>[textarea:asset_description:description]</td>
+	</tr>  
+  <tr>
+		<td>Deaccsessioned?</td>
+		<td>[checkbox:asset_deaccessioned:deaccessioned:]</td>
+	</tr>   
+  <tr>
+		<td>Deaccession Information</td>
+		<td>[textarea:asset_deaccession_notes:deaccessioninfo]</td>
+	</tr>      
+  <tr>
+	<td>Image</td>
+		<td>[file  :  upload_file  : File : class="file" id="file"]</td>
+	</tr>
+	<tr>
+		<td>Update</td>
+		<td><input type="submit" value="Submit" class="button"><input type="button" value="Cancel"  onClick="self.location.href='../index.php'" class="button"></td>
+	</tr>
+</table>
+[end-insert]
+</form>
+<br />
+
+</body>
+
+</html>

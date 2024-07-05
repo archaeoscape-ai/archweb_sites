@@ -1,0 +1,299 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>RCRC/GAP Databases</title>
+<link rel="stylesheet" href="styles/backend_style.css" type="text/css" />
+<link rel="icon" 
+      type="image/ico" 
+      href="clipboard.ico">
+
+<script language="javascript" type="text/javascript">
+function copytag() {
+	mytext = document.getElementById('mainlabel').value;
+  //alert(mytext);
+  document.getElementById('toplabel').value = mytext;
+}
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script>
+  $( document ).ready(function() {
+    $("#projectdropdown").val("1");
+    $("#typedropdown").val("1");
+    $("#materialdropdown").val("1");
+    $("#ceramicdropdown").val("3");
+    $("#worksitedropdown").val("167");
+    $("#datecollectedtextbox").val("13/9/12");
+    $("#labeltextbox").val("GC.0131.");
+    $("#contexttextbox").val("surface");
+    $("#formdropdown").val("1");
+    $("#pastedropdown").val("4");
+    $("#texturedropdown").val("1");
+    $("#texturedropdown").val("1");
+    $("#intglazedropdown").val("5");
+    $("#extglazedropdown").val("5");
+    $("#decorationdropdown").val("4");
+    });
+</script>
+
+
+
+</head>
+<body>
+[errors]
+<h2>RCRC/GAP Databases | Add Artefact | ID Number [evaluate:(max(artefact_id)+1):myartefacts]</h2>
+<br>
+<table>
+<form action="artefact_add.php" method="post" enctype="multipart/form-data">
+[insert required myartefacts addartefact]
+
+[dump-vars]
+  <tr>
+		<td>Project</td>
+		<td>[dropdown required:artefact_project_id:myprojectname:select project_id,project_name from projects ORDER BY project_name: id="projectdropdown"]<span class="required">&laquo;</span></td>
+	</tr>
+
+  <tr>
+		<td>Type</td>
+		<td>[dropdown required:artefact_type_id:mytypename:select type_id,type_name from types ORDER BY type_name: id="typedropdown"]<span class="required">&laquo;</span></td>
+	</tr>
+
+  <tr>
+		<td>Material</td>
+		<td>[dropdown required:artefact_material_id:mymaterialname:select material_id,material_name from materials ORDER BY material_name: id="materialdropdown"]<span class="required">&laquo;</span></td>
+	</tr>
+  <tr>
+		<td>Ceramic Type</td>
+		<td>[dropdown :artefact_ceramic_id:myceramicname:select ceramic_id,ceramic_name from ceramics ORDER BY ceramic_name: id="ceramicdropdown"]</td>
+	</tr>
+
+  <tr>
+		<td>Worksite</td>
+		<td>[dropdown required:artefact_worksite_id:myworksite:select worksite_id,worksite_name from worksites ORDER BY worksite_name: id="worksitedropdown"]<span class="required">&laquo;</span></td>
+	</tr>
+
+  <tr>
+		<td>Artefact Label</td>
+		<td>[textbox:artefact_label:labelofmyartefact: id="labeltextbox"]</td>
+	</tr>
+
+ <tr>
+		<td>Asset ID</td>
+		<td>[dropdown :artefact_asset_id:myassetname:select container_id,container_id from containers ORDER BY container_id]</td>
+	</tr>
+
+  <tr>
+		<td>Date collected</td>
+		<td>[textbox:artefact_date_collected:datecollected: id="datecollectedtextbox"]</td>
+	</tr>
+  <tr>
+		<td>Context</td>
+		<td>[textbox:artefact_context:contextofmyartefact: id="contexttextbox"]</td>
+	</tr>    
+  
+<tr>
+		<td>Mass (g)</td>
+		<td>[textbox:artefact_mass:mass]</td>
+	</tr>
+<tr>
+		<td>Thickness (min)</td>
+		<td>[textbox:artefact_thickness_min:thick_min]</td>
+	</tr>
+<tr>
+		<td>Thickness (max)</td>
+		<td>[textbox:artefact_thickness_max:thick_max]</td>
+	</tr>
+<tr>
+		<td>Max/Mouth Diameter</td>
+		<td>[textbox:artefact_diameter:diameter]</td>
+	</tr>
+<tr>
+		<td>Height</td>
+		<td>[textbox:artefact_height:height]</td>
+	</tr>
+
+ <tr>
+		<td>Portion</td>
+		<td>[dropdown :artefact_portion_id:myportionname:select portion_id,portion_name from portions ORDER BY portion_name]</td>
+	</tr>
+
+ <tr>
+		<td>Form</td>
+		<td>[dropdown :artefact_form_id:myformname:select form_id,form_name from forms ORDER BY form_name: id="formdropdown"]</td>
+	</tr>
+
+ <tr>
+		<td>Paste - Colour</td>
+		<td>[dropdown :artefact_paste_id:mypastename:select paste_id,paste_name from pastes ORDER BY paste_name: id="pastedropdown"]</td>
+	</tr>
+
+ <tr>
+		<td>Paste - Texture</td>
+		<td>[dropdown :artefact_texture_id:mytexturename:select texture_id,texture_name from textures ORDER BY texture_id: id="texturedropdown"]</td>
+	</tr>
+ <tr>
+		<td>Glaze - Interior</td>
+		<td>[dropdown :artefact_int_glaze_id:myintglazename:select int_glaze_id,int_glaze_name from int_glazes ORDER BY int_glaze_name: id="intglazedropdown"]</td>
+	</tr>
+
+ <tr>
+		<td>Glaze - Exterior</td>
+		<td>[dropdown :artefact_ext_glaze_id:myextglazename:select ext_glaze_id,ext_glaze_name from ext_glazes ORDER BY ext_glaze_name: id="extglazedropdown"]</td>
+	</tr>
+
+ <tr>
+		<td>Decoration</td>
+		<td>[dropdown :artefact_decoration_id:mydecorationname:select decoration_id,decoration_name from decorations ORDER BY decoration_name: id="decorationdropdown"]</td>
+	</tr>
+
+ <tr>
+		<td>Moulded?</td>
+		<td>[checkbox:artefact_dec_mould:dec_mould]</td>
+	</tr> 
+
+ <tr>
+		<td>Incised?</td>
+		<td>[checkbox:artefact_dec_incised:dec_incised]</td>
+	</tr> 	
+
+ <tr>
+		<td>Carved?</td>
+		<td>[checkbox:artefact_dec_carved:dec_carved]</td>
+	</tr> 
+
+ <tr>
+		<td>Chrysanthemum?</td>
+		<td>[checkbox:artefact_dec_chrysan:dec_chrysan]</td>
+	</tr> 
+
+ <tr>
+		<td>Fluted?</td>
+		<td>[checkbox:artefact_dec_fluted:dec_fluted]</td>
+	</tr> 
+
+ <tr>
+		<td>Lobed?</td>
+		<td>[checkbox:artefact_dec_lobed:dec_lobed]</td>
+	</tr> 
+
+<tr>
+		<td>Lotus?</td>
+		<td>[checkbox:artefact_dec_lotus:dec_lotus]</td>
+	</tr> 
+
+<tr>
+		<td>Floral scroll?</td>
+		<td>[checkbox:artefact_dec_fscroll:dec_fscroll]</td>
+	</tr> 
+
+
+
+ <tr>
+		<td>Stacking ring?</td>
+		<td>[checkbox:artefact_stacking_ring:stacking_ring]</td>
+	</tr> 
+
+ <tr>
+		<td>Site of Production</td>
+		<td>[dropdown :artefact_archsite_id:myarchsitename:select archsite_id,archsite_name_en from archsites WHERE 1 and archsite_archsitetype='13' ORDER BY archsite_name_en]</td>
+	</tr>
+
+ <tr>
+		<td>Region</td>
+		<td>[dropdown :artefact_region_id:myregionname:select region_id,region_name from regions ORDER BY region_name]</td>
+	</tr>
+
+<tr>
+		<td>Chinese dynasty</td>
+		<td>[dropdown :artefact_ch_dynasty_id:mychdynastyname:select ch_dynasty_id,ch_dynasty_name from ch_dynasties ORDER BY ch_dynasty_start]</td>
+	</tr>
+
+<tr>
+		<td>Footring?</td>
+		<td>[checkbox:artefact_footring:footring]</td>
+	</tr> 
+
+ <tr>
+		<td>Rust stained?</td>
+		<td>[checkbox:artefact_rust_stained:rust_stained]</td>
+	</tr> 
+ <tr>
+		<td>Sand crust?</td>
+		<td>[checkbox:artefact_sand_encrusted:sand_encrusted]</td>
+	</tr> 
+
+  <tr>
+		<td>Footring Height</td>
+		<td>[textbox:artefact_footring_height:footring_height]</td>
+	</tr>
+
+  <tr>
+		<td>Footring Thickness</td>
+		<td>[textbox:artefact_footring_thickness:footring_thickness]</td>
+	</tr>
+
+  <tr>
+		<td>Footring/Base Diameter</td>
+		<td>[textbox:artefact_footring_diameter:footring_diameter]</td>
+	</tr>
+
+<tr>
+    <td>Base glazed?</td>
+    <td>[checkbox:artefact_baseglaze:baseglaze]</td>
+  </tr> 
+  <tr>
+    <td>Footring inside glazed?</td>
+    <td>[checkbox:artefact_footinnglaze:footinnglaze]</td>
+  </tr> 
+  <tr>
+    <td>Footring outside glazed?</td>
+    <td>[checkbox:artefact_footoutglaze:footoutglaze]</td>
+  </tr> 
+  <tr>
+    <td>Footring bottom glazed?</td>
+    <td>[checkbox:artefact_footbotglaze:footbotglaze]</td>
+  </tr> 
+
+  <tr>
+		<td>Date start (year)</td>
+		<td>[textbox:artefact_date_start_year:date_start_year]</td>
+	</tr>
+
+  <tr>
+		<td>Date end (year)</td>
+		<td>[textbox:artefact_date_end_year:date_end_year]</td>
+	</tr>
+
+  <tr>
+		<td>Circa?</td>
+		<td>[checkbox:artefact_date_circa:date_circa]</td>
+	</tr> 
+
+  <tr>
+		<td>Check?</td>
+		<td>[checkbox:artefact_check:check]</td>
+	</tr> 
+
+ <tr>
+		<td>Comments</td>
+		<td>[textarea:artefact_comments:comments]</td>
+	</tr>
+
+  <tr>
+	<td>Image</td>
+		<td>[file  :  upload_file  : File : class="file" id="file"]</td>
+	</tr>
+	<tr>
+		<td>Update</td>
+		<td><input type="submit" value="Submit" class="button"><input type="button" value="Cancel"  onClick="self.location.href='asset_search.php'" class="button"></td>
+	</tr>
+</table>
+[end-insert]
+</form>
+<br />
+
+</body>
+
+</html>
