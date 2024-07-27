@@ -1,0 +1,26 @@
+* archweb_sites (former archaeodata.space)
+
+- PHP5.6/MySQL application
+- Setup is a bit tricky, providing a Docker container to simplify
+- Only a reduced subset of the data is provided in this demo (PKKS region}
+
+** Docker container/Development version with bind mount
+
+- Docker container with Apache, PHP5.6, MySQL installed
+- MySQL database is imported from mysql_dump_pkks.sql
+- Docker container will bind mount and serve the html folder, allowing
+  for a measure of live debugging/development
+-   
+  #+begin_src bash
+  # Will build the Docker image
+  bash 01_build_docker_image.sh
+  # Will start the container in interactive mode and bind the html folder
+  bash 02_start_docker_server.sh
+  #+end_src
+
+- After executing these scripts access the webserver at http://localhost:80
+- 
+  #+begin_src bash
+  # Cleanup the images if needed
+  03_cleanup_docker_images.sh
+  #+end_src
