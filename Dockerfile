@@ -34,6 +34,10 @@ RUN sed -i 's|;mysqli.default_socket =|mysqli.default_socket = /var/run/mysqld/m
 # Apache: Fix complain about servername
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
+# Copy the whole html folder
+RUN rm -r /var/www/html/*
+COPY ./html/ /var/www/html/
+
 # Export port 80, start Apache
 EXPOSE 80
 CMD service mysql start && service apache2 start && tail -f /var/log/apache2/access.log /var/log/apache2/error.log

@@ -1,2 +1,2 @@
 # Build the docker image
-docker build -t archweb-sites-pkks .
+docker build -t archweb-sites-pkks-sc .

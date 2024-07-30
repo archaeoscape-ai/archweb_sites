@@ -4,12 +4,11 @@
 - Setup is a bit tricky, providing a Docker container to simplify
 - Only a reduced subset of the data is provided in this demo (PKKS region}
 
-** Docker container/Development version with bind mount
+** Docker container/Development version (self-contained)
 
 - Docker container with Apache, PHP5.6, MySQL installed
 - MySQL database is imported from mysql_dump_pkks.sql
-- Docker container will bind mount and serve the html folder, allowing
-  for a measure of live debugging/development
+- Docker container will copy and and serve the html folder
 -   
   #+begin_src bash
   # Will build the Docker image
